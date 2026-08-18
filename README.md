@@ -32,7 +32,7 @@ chargée.
 
 ## Installation
 
-Node 20 ou plus récent.
+Node 22.12 ou plus récent, exigé par Astro 7.
 
 ```bash
 npm install
