@@ -1,0 +1,49 @@
+---
+import Icon from "./Icon.astro";
+import { BUSINESS, CTA_ARIA, CTA_LABEL } from "../site.config";
+
+interface Props {
+  variant?: "solid" | "outline" | "light";
+  size?: "md" | "lg";
+  full?: boolean;
+  class?: string;
+}
+
+const {
+  variant = "solid",
+  size = "md",
+  full = false,
+  class: className = "",
+} = Astro.props;
+
+const base =
+  "inline-flex items-center justify-center gap-2.5 rounded-[10px] font-semibold tracking-[-0.01em] transition-colors duration-150 min-h-[44px]";
+
+const variants: Record<string, string> = {
+  solid: "bg-tuile-600 text-white hover:bg-tuile-700",
+  outline:
+    "border border-line bg-white text-ink-950 hover:border-tuile-600 hover:text-tuile-600",
+  light: "bg-white text-ink-950 hover:bg-tuile-50 hover:text-tuile-700",
+};
+
+const sizes: Record<string, string> = {
+  md: "px-5 py-3 text-[15px]",
+  lg: "px-7 py-4 text-[17px]",
+};
+---
+
+<a
+  href={BUSINESS.phoneHref}
+  aria-label={CTA_ARIA}
+  data-call-link
+  class:list={[
+    base,
+    variants[variant],
+    sizes[size],
+    full ? "w-full" : "",
+    className,
+  ]}
+>
+  <Icon name="phone" size={size === "lg" ? 20 : 18} />
+  <span>{CTA_LABEL}</span>
+</a>

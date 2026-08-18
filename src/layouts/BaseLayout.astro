@@ -1,0 +1,141 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import StickyCallBar from "../components/StickyCallBar.astro";
+import type { Crumb } from "../components/Breadcrumb.astro";
+import { BUSINESS, SITE_URL } from "../site.config";
+
+interface Props {
+  title: string;
+  description: string;
+  /** Chemin canonique, ex. "/services/couverture". Par défaut, l'URL courante. */
+  canonical?: string;
+  noindex?: boolean;
+  ogImage?: string;
+  /** Fil d'Ariane, utilisé pour le JSON-LD BreadcrumbList. */
+  breadcrumb?: Crumb[];
+}
+
+const {
+  title,
+  description,
+  canonical,
+  noindex = false,
+  ogImage = "/og-default.png",
+  breadcrumb = [],
+} = Astro.props;
+
+const canonicalUrl = new URL(
+  canonical ?? Astro.url.pathname,
+  SITE_URL,
+).href.replace(/(?<!:)\/+$/, "");
+
+const ogImageUrl = new URL(ogImage, SITE_URL).href;
+
+const breadcrumbLd =
+  breadcrumb.length > 0
+    ? {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Accueil",
+            item: SITE_URL,
+          },
+          ...breadcrumb.map((crumb, i) => ({
+            "@type": "ListItem",
+            position: i + 2,
+            name: crumb.label,
+            ...(crumb.href
+              ? { item: new URL(crumb.href, SITE_URL).href }
+              : { item: canonicalUrl }),
+          })),
+        ],
+      }
+    : null;
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    {
+      noindex ? (
+        <meta name="robots" content="noindex, follow" />
+      ) : (
+        <meta name="robots" content="index, follow, max-image-preview:large" />
+      )
+    }
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Gabarre Couverture" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Gabarre Couverture, couvreur zingueur à Montauban"
+    />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <meta name="theme-color" content="#0B0E11" />
+    <meta name="format-detection" content="telephone=yes" />
+    <meta name="geo.region" content="FR-82" />
+    <meta name="geo.placename" content={BUSINESS.city} />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    {/* Inter auto-hébergée : aucune requête vers un domaine tiers. */}
+    <link
+      rel="preload"
+      href="/fonts/inter-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    {
+      breadcrumbLd && (
+        <script
+          type="application/ld+json"
+          is:inline
+          set:html={JSON.stringify(breadcrumbLd)}
+        />
+      )
+    }
+    <slot name="head" />
+  </head>
+
+  <body>
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[70] focus:rounded-[8px] focus:bg-ink-950 focus:px-4 focus:py-3 focus:text-white"
+      >Aller au contenu</a
+    >
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    <StickyCallBar />
+  </body>
+</html>

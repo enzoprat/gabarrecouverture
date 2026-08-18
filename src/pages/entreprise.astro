@@ -1,0 +1,279 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import CallButton from "../components/CallButton.astro";
+import CallCta from "../components/CallCta.astro";
+import Icon from "../components/Icon.astro";
+import type { IconName } from "../components/Icon.astro";
+import Faq from "../components/Faq.astro";
+import type { FaqItem } from "../components/Faq.astro";
+import image from "../assets/entreprise-atelier.webp";
+import {
+  BUSINESS,
+  COMMUNES,
+  CTA_ARIA,
+  CTA_REASSURANCE,
+} from "../site.config";
+
+const breadcrumb = [{ label: "L'entreprise" }];
+
+const engagements: { icon: IconName; title: string; text: string }[] = [
+  {
+    icon: "user",
+    title: "Un seul interlocuteur",
+    text: "La personne qui prend l'appel, monte sur la toiture, établit le devis et réalise le chantier est la même. Aucune information ne se perd entre un commercial et une équipe de pose.",
+  },
+  {
+    icon: "file-text",
+    title: "Un devis qui décrit le travail",
+    text: "Chaque poste apparaît séparément avec sa quantité, en mètres carrés ou en mètres linéaires, et le matériau nommé. Vous pouvez le comparer ligne à ligne avec un autre devis.",
+  },
+  {
+    icon: "shield",
+    title: "Assurance décennale à jour",
+    text: `L'attestation de ${BUSINESS.insurance} est jointe au devis, avant signature. Vous n'avez pas à la réclamer.`,
+  },
+  {
+    icon: "broom",
+    title: "Le chantier rendu propre",
+    text: "Bâchage des abords, évacuation des gravats en déchèterie professionnelle et passage d'un aimant au sol pour récupérer clous et chutes de zinc.",
+  },
+];
+
+const garanties = [
+  {
+    title: "Garantie décennale",
+    duree: "10 ans",
+    text: "Elle couvre les dommages qui compromettent la solidité de l'ouvrage ou le rendent impropre à son usage : infiltration liée à la pose, défaut d'étanchéité d'un solin ou d'une noue, affaissement. Elle court à compter de la réception des travaux.",
+  },
+  {
+    title: "Garantie de parfait achèvement",
+    duree: "1 an",
+    text: "Elle oblige l'entreprise à reprendre tous les désordres signalés pendant l'année qui suit la réception, qu'ils figurent sur le procès-verbal ou qu'ils apparaissent ensuite. Elle s'applique quelle que soit leur gravité.",
+  },
+  {
+    title: "Garantie biennale",
+    duree: "2 ans",
+    text: "Elle porte sur les éléments d'équipement dissociables du bâti, par exemple certains accessoires de couverture ou de ventilation, qui peuvent être remplacés sans toucher à l'ouvrage lui-même.",
+  },
+];
+
+const faq: FaqItem[] = [
+  {
+    q: "Comment se passe le paiement d'un chantier ?",
+    a: "Le principe habituel est un acompte à la commande, qui sert à approvisionner les matériaux, puis le solde à la fin des travaux, après réception. Sur un chantier long, un ou deux appels de situation intermédiaires peuvent être prévus, en fonction de l'avancement réel. Les modalités exactes figurent sur le devis, avec les montants et les échéances. Rien ne se décide en cours de chantier.",
+  },
+  {
+    q: "Que se passe-t-il si la météo bloque le chantier ?",
+    a: "Un chantier de couverture s'arrête par vent fort, par pluie soutenue et par gel. Dans ce cas, la toiture est refermée ou bâchée avant l'interruption, le logement reste hors d'eau, et la reprise est reprogrammée dès que les conditions le permettent. C'est la raison pour laquelle une durée de chantier s'annonce toujours en jours de travail effectifs, jamais en date de fin ferme.",
+  },
+  {
+    q: "Faites-vous aussi des petites interventions ?",
+    a: "Oui. Remplacer trois tuiles cassées, reprendre un solin, curer des gouttières ou reposer une faîtière descellée font partie du travail courant. Ces interventions coûtent peu et évitent des réparations bien plus lourdes deux hivers plus tard. Le seul point qui compte est la distance : sur une intervention courte, un déplacement lointain n'a pas de sens économique, ni pour vous ni pour moi.",
+  },
+];
+
+const title = "L'entreprise, couvreur zingueur à Montauban | Gabarre";
+const description =
+  "Gabarre Couverture, artisan couvreur zingueur charpentier à Montauban : méthode de travail, garanties, assurance décennale, horaires et zone d'intervention.";
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical="/entreprise"
+  breadcrumb={breadcrumb}
+>
+  <PageHero
+    eyebrow="L'entreprise"
+    title="Gabarre, artisan couvreur à Montauban"
+    lead="Une entreprise artisanale de couverture, zinguerie et charpente installée à Montauban. Un seul interlocuteur du diagnostic à la réception, des devis détaillés et une assurance décennale à jour."
+    breadcrumb={breadcrumb}
+  />
+
+  <section class="bg-white py-16 md:py-24">
+    <div class="container-site">
+      <div class="grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-14">
+        <div>
+          <SectionHeading
+            eyebrow="La maison"
+            title="Une entreprise à taille d'artisan"
+            id="artisan"
+          />
+          <div class="prose-site mt-6">
+            <p>
+              Gabarre Couverture est une entreprise artisanale créée en {
+                BUSINESS.foundingYear
+              }, basée à {BUSINESS.city} et immatriculée sous le SIRET {
+                BUSINESS.siret
+              }. L'activité couvre l'ensemble du toit : la couverture, la
+              zinguerie, la charpente et l'entretien.
+            </p>
+            <p>
+              {"{{"}Présentation de l'artisan à valider par le client : parcours,
+              formation, années de métier, éventuelles spécialités. Ce
+              paragraphe reste volontairement vide tant que les informations
+              n'ont pas été confirmées, pour ne rien affirmer d'inexact.{"}}"}
+            </p>
+            <p>
+              Le fonctionnement est simple. Vous appelez, on cadre le sujet au
+              téléphone, je passe voir la toiture si l'intervention le justifie,
+              et vous recevez un devis détaillé. Si vous le validez, c'est moi
+              qui réalise le chantier. Il n'y a pas de sous-traitance en
+              cascade, et pas de commercial entre vous et le toit.
+            </p>
+            <p>
+              L'activité se concentre sur Montauban et un rayon d'environ trente
+              minutes, soit {COMMUNES.length} communes détaillées sur la page <a
+                href="/zone-intervention">zone d'intervention</a
+              >. Ce périmètre permet d'intervenir vite sur une fuite et de
+              repasser sans facturer un déplacement.
+            </p>
+          </div>
+
+          <div class="mt-8">
+            <CallButton size="lg" />
+            <p class="mt-3 text-[14px] text-ink-400">{CTA_REASSURANCE}</p>
+          </div>
+        </div>
+
+        <div>
+          <Image
+            src={image}
+            alt="Matériel et véhicule de l'entreprise Gabarre Couverture à Montauban"
+            widths={[600, 900]}
+            sizes="(min-width: 1024px) 500px, 100vw"
+            loading="lazy"
+            class="aspect-[4/3] w-full rounded-[10px] border border-line object-cover"
+          />
+
+          <dl class="mt-6 rounded-[10px] border border-line bg-cream p-6">
+            <div class="flex gap-3">
+              <dt class="mt-0.5 shrink-0 text-tuile-600">
+                <Icon name="phone" size={19} />
+                <span class="sr-only">Téléphone</span>
+              </dt>
+              <dd>
+                <a
+                  href={BUSINESS.phoneHref}
+                  aria-label={CTA_ARIA}
+                  data-call-link
+                  class="text-[20px] font-extrabold tracking-[-0.01em] text-ink-950 transition-colors duration-150 hover:text-tuile-600"
+                  >{BUSINESS.phoneDisplay}</a
+                >
+              </dd>
+            </div>
+            <div class="mt-4 flex gap-3 border-t border-line pt-4">
+              <dt class="mt-0.5 shrink-0 text-ink-400">
+                <Icon name="map-pin" size={19} />
+                <span class="sr-only">Adresse</span>
+              </dt>
+              <dd class="text-[15px] leading-[1.6] text-ink-600">
+                {BUSINESS.street}<br />{BUSINESS.postalCode}
+                {BUSINESS.city}
+              </dd>
+            </div>
+            <div class="mt-4 flex gap-3 border-t border-line pt-4">
+              <dt class="mt-0.5 shrink-0 text-ink-400">
+                <Icon name="clock" size={19} />
+                <span class="sr-only">Horaires</span>
+              </dt>
+              <dd class="text-[15px] leading-[1.6] text-ink-600">
+                {BUSINESS.openingHoursLabel}
+              </dd>
+            </div>
+            <div class="mt-4 flex gap-3 border-t border-line pt-4">
+              <dt class="mt-0.5 shrink-0 text-ink-400">
+                <Icon name="shield" size={19} />
+                <span class="sr-only">Assurance</span>
+              </dt>
+              <dd class="text-[15px] leading-[1.6] text-ink-600">
+                {BUSINESS.insurance}
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-cream py-16 md:py-24">
+    <div class="container-site">
+      <SectionHeading
+        eyebrow="Engagements"
+        title="Ce sur quoi vous pouvez compter"
+        id="engagements"
+      />
+      <div class="mt-10 grid gap-x-8 gap-y-9 md:grid-cols-2">
+        {
+          engagements.map((item) => (
+            <div class="flex gap-4">
+              <span
+                class="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-[8px] border border-line bg-white text-tuile-600"
+                aria-hidden="true"
+              >
+                <Icon name={item.icon} size={20} />
+              </span>
+              <div>
+                <h3 class="h3-site">{item.title}</h3>
+                <p class="mt-2 text-[15px] leading-[1.65] text-ink-600">
+                  {item.text}
+                </p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-16 md:py-24">
+    <div class="container-site">
+      <SectionHeading
+        eyebrow="Garanties"
+        title="Les trois garanties qui s'appliquent à vos travaux"
+        id="garanties"
+        intro="Elles ne se cumulent pas au hasard, chacune couvre une nature de désordre différente et court sur une durée propre."
+      />
+      <div class="mt-10 grid gap-5 md:grid-cols-3">
+        {
+          garanties.map((garantie) => (
+            <div class="rounded-[10px] border border-line bg-white p-6 shadow-[0_1px_2px_rgba(0,0,0,.04)]">
+              <span class="inline-flex items-center rounded-[6px] bg-tuile-50 px-2.5 py-1 text-[13px] font-semibold text-tuile-700">
+                {garantie.duree}
+              </span>
+              <h3 class="h3-site mt-4">{garantie.title}</h3>
+              <p class="mt-2 text-[15px] leading-[1.6] text-ink-600">
+                {garantie.text}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+
+      <p class="mt-8 max-w-3xl text-[15px] leading-[1.65] text-ink-600">
+        Aucune certification ou qualification autre que celles indiquées ici
+        n'est revendiquée. {"{{"}Si l'entreprise détient une qualification RGE,
+        Qualibat ou équivalente, fournir le numéro et l'organisme pour l'ajouter
+        à cette page.{"}}"}
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-cream py-16 md:py-24">
+    <div class="container-site">
+      <SectionHeading
+        eyebrow="Questions fréquentes"
+        title="Paiement, météo et petites interventions"
+        id="faq"
+      />
+      <div class="mt-10 max-w-3xl">
+        <Faq items={faq} />
+      </div>
+    </div>
+  </section>
+
+  <CallCta />
+</BaseLayout>

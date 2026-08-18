@@ -1,0 +1,203 @@
+---
+import ServiceLayout from "../../layouts/ServiceLayout.astro";
+import type { FaqItem } from "../../components/Faq.astro";
+import image from "../../assets/service-zinguerie.webp";
+
+const includes = [
+  {
+    label: "Gouttières pendantes et corniches",
+    text: "Fourniture et pose de gouttières demi-rondes ou moulurées, sur crochets à queue longue fixés dans la charpente ou à queue courte vissés en bandeau, avec la pente nécessaire vers la descente.",
+  },
+  {
+    label: "Chéneaux encaissés",
+    text: "Réalisation et remplacement de chéneaux en zinc soudé, avec naissance, trop-plein et raccord sur l'entablement. C'est la pièce la plus exposée d'une toiture, et la première à percer.",
+  },
+  {
+    label: "Descentes d'eau pluviale",
+    text: "Tuyaux de descente, coudes, colliers et dauphin en pied de mur. Le raccordement au réseau enterré ou à un récupérateur est traité au même moment.",
+  },
+  {
+    label: "Noues",
+    text: "Façonnage de noues en zinc ou en cuivre à la jonction de deux pans. Le pliage doit intégrer des relevés suffisants, sinon l'eau remonte par capillarité sous les tuiles.",
+  },
+  {
+    label: "Solins et bandes de rive",
+    text: "Solins de cheminée et de souche, bande porte-solin engravée ou sur bavette, bandes de rive et abergements de châssis de toit. Ce sont les points de fuite les plus fréquents.",
+  },
+  {
+    label: "Habillage de planches de rive",
+    text: "Bandeaux et sous-face en aluminium laqué ou en zinc, pour cesser de repeindre le bois tous les cinq ans et supprimer les entrées de nuisibles.",
+  },
+  {
+    label: "Sorties de toiture",
+    text: "Abergements de conduits, ventilations, sorties de VMC et de poêle. Chaque pénétration dans la couverture est un point à étanchéifier proprement.",
+  },
+  {
+    label: "Nettoyage des évacuations",
+    text: "Curage des gouttières et des chéneaux, contrôle de l'écoulement, pose de crapaudines en tête de descente pour éviter les bouchons de feuilles.",
+  },
+];
+
+const steps = [
+  {
+    num: "01",
+    title: "Repérage de l'origine du débordement",
+    text: "Une gouttière qui déborde n'est pas toujours bouchée. Défaut de pente, section sous-dimensionnée, joint ouvert ou naissance trop haute : le diagnostic conditionne la réparation.",
+  },
+  {
+    num: "02",
+    title: "Relevé des linéaires et des sections",
+    text: "Mesure des longueurs de gouttière et de chéneau, du nombre de descentes et de la surface de toiture collectée. La section se calcule, elle ne se choisit pas au hasard.",
+  },
+  {
+    num: "03",
+    title: "Dépose et façonnage",
+    text: "Retrait de l'existant, puis pliage des pièces droites et façonnage des angles et des naissances. Les raccords en zinc sont soudés à l'étain, pas simplement collés.",
+  },
+  {
+    num: "04",
+    title: "Pose et calage de la pente",
+    text: "Fixation des crochets au cordeau avec une pente régulière vers les descentes, puis mise en place des éléments et soudure des jonctions.",
+  },
+  {
+    num: "05",
+    title: "Essai à l'eau",
+    text: "Mise en eau de la gouttière ou du chéneau pour vérifier l'écoulement et l'absence de rétention. Le contrôle se fait avant le repli du chantier, pas au premier orage.",
+  },
+];
+
+const materials = [
+  {
+    name: "Zinc naturel",
+    text: "Le standard de la zinguerie. Se soude, se façonne sur mesure et se patine avec le temps. Longue durée de vie tant qu'il n'est pas mis en contact direct avec du cuivre ou du mortier frais.",
+  },
+  {
+    name: "Zinc prépatiné",
+    text: "Aspect gris mat dès la pose, sans la période de patine irrégulière du zinc naturel. Utile quand la zinguerie est très visible depuis la rue.",
+  },
+  {
+    name: "Aluminium laqué",
+    text: "Léger, disponible dans un large nuancier RAL, il se pose en gouttière et surtout en habillage de rive. Assemblage par emboîtement et rivets plutôt que par soudure.",
+  },
+  {
+    name: "Cuivre",
+    text: "Réservé aux bâtiments où l'aspect le justifie, notamment en noue et en solin. Très durable, mais il ne doit jamais se trouver en amont d'un élément en zinc.",
+  },
+  {
+    name: "PVC",
+    text: "Solution économique en gouttière pendante sur bâti récent. Sensible aux fortes variations de température et aux chocs, il se remplace plus souvent que le zinc.",
+  },
+  {
+    name: "Crapaudines et pare-feuilles",
+    text: "Grilles en tête de descente et protections de gouttière quand la maison est bordée de platanes ou de résineux. Elles réduisent nettement la fréquence des curages.",
+  },
+];
+
+const tarifs = [
+  {
+    label: "Gouttière zinc, fourniture et pose",
+    range: "45 à 90 €",
+    unit: "par mètre linéaire",
+  },
+  {
+    label: "Chéneau encaissé en zinc soudé",
+    range: "90 à 180 €",
+    unit: "par mètre linéaire",
+  },
+  {
+    label: "Descente d'eau pluviale complète",
+    range: "40 à 80 €",
+    unit: "par mètre linéaire",
+  },
+  {
+    label: "Reprise de solin de cheminée",
+    range: "250 à 700 €",
+    unit: "l'intervention",
+  },
+  {
+    label: "Nettoyage et curage de gouttières",
+    range: "3 à 8 €",
+    unit: "par mètre linéaire",
+  },
+];
+
+const facteurs = [
+  "La hauteur de la maison, un chantier au-dessus d'un étage impose souvent un échafaudage ou une nacelle.",
+  "Le matériau retenu, l'écart entre PVC, aluminium laqué et zinc soudé est significatif.",
+  "Le nombre d'angles, de naissances et de raccords, qui demandent chacun un façonnage sur mesure.",
+  "L'accessibilité de la zone : un chéneau encaissé derrière un acrotère se travaille plus lentement.",
+  "L'état du support de fixation, un bandeau de rive pourri doit être remplacé avant de reposer les crochets.",
+];
+
+const faq: FaqItem[] = [
+  {
+    q: "Zinc, aluminium ou PVC, que choisir pour des gouttières ?",
+    a: "Le zinc reste la référence sur une maison ancienne : il se façonne sur mesure, se soude et dure longtemps. L'aluminium laqué est intéressant quand vous voulez une teinte précise et un entretien nul, notamment en habillage de rive. Le PVC coûte moins cher à l'achat mais se dilate beaucoup, ce qui ouvre les joints au fil des étés. Sur une maison exposée au soleil du Tarn-et-Garonne, il vieillit plus vite qu'ailleurs.",
+  },
+  {
+    q: "Ma gouttière déborde, faut-il forcément la remplacer ?",
+    a: "Pas systématiquement. Trois causes reviennent le plus souvent : un simple bouchon de feuilles et de mousse en tête de descente, une pente devenue irrégulière parce qu'un crochet a cédé, ou une section trop faible pour la surface de toiture collectée. Les deux premières se règlent par un curage et un recalage des crochets. La troisième impose de redimensionner la gouttière ou d'ajouter une descente. Le diagnostic se fait sur place.",
+  },
+  {
+    q: "À quelle fréquence faut-il curer gouttières et chéneaux ?",
+    a: "Une fois par an dans la plupart des cas, de préférence après la chute des feuilles, en fin d'automne. Deux fois par an si la maison est bordée de platanes, de tilleuls ou de résineux, ou si la toiture est encore chargée en mousse. Un chéneau encaissé demande plus d'attention qu'une gouttière pendante, puisqu'il déborde à l'intérieur du bâti et que la fuite se voit sur le mur, souvent trop tard.",
+  },
+];
+---
+
+<ServiceLayout
+  slug="zinguerie"
+  metaTitle="Zinguerie et gouttières à Montauban (82) | Gabarre"
+  metaDescription="Pose de gouttières zinc et aluminium, chéneaux, noues, solins et descentes d'eau pluviale à Montauban et en 82. Devis gratuit, garantie décennale."
+  eyebrow="Zinguerie"
+  h1="Zinguerie, gouttières et chéneaux à Montauban"
+  lead="Gouttières, chéneaux encaissés, descentes d'eau pluviale, noues et solins. Toute la partie du toit qui conduit l'eau, en zinc, aluminium ou cuivre, façonnée et soudée sur mesure."
+  serviceName="la zinguerie"
+  serviceType="Zinguerie, gouttières et évacuation des eaux pluviales"
+  image={image}
+  imageAlt="Gouttière en zinc soudée en cours de pose sur un bandeau de rive"
+  includesTitle="Ce que comprend la prestation de zinguerie"
+  includesIntro="La zinguerie, c'est tout ce qui canalise l'eau une fois qu'elle a quitté la tuile. Un défaut à cet endroit se paye toujours sur la façade ou sur la charpente."
+  includes={includes}
+  stepsTitle="Comment on procède sur un chantier de zinguerie"
+  steps={steps}
+  materialsTitle="Matériaux et options"
+  materialsIntro="Le choix dépend du bâti, de l'exposition et de la durée que vous visez. Un point technique compte, le sens d'écoulement entre métaux différents, sous peine de corrosion accélérée."
+  materials={materials}
+  pricingIntro="Les montants ci-dessous couvrent la dépose de l'existant, la fourniture et la pose, hors échafaudage."
+  tarifs={tarifs}
+  facteurs={facteurs}
+  faq={faq}
+>
+  <section class="bg-white py-16 md:py-24">
+    <div class="container-site">
+      <div class="prose-site max-w-3xl">
+        <h2>Une fuite de zinguerie ressemble à une fuite de couverture</h2>
+        <p>
+          Quand une tache apparaît au plafond près d'un mur de refend ou d'une
+          cheminée, la tuile n'est pas toujours en cause. Un solin décollé, une
+          noue percée ou un chéneau fissuré donnent exactement le même symptôme.
+          C'est pour cette raison que la recherche du point d'entrée fait partie
+          de la prestation <a href="/services/reparation-fuite-toiture"
+            >réparation de fuite de toiture</a
+          >, avant toute réparation.
+        </p>
+        <p>
+          Le bois qui se trouve sous une zinguerie défaillante souffre en
+          silence. Un chéneau qui déborde pendant deux hivers finit par pourrir
+          la panne sablière qu'il surplombe. Si le diagnostic révèle des bois
+          atteints, la reprise relève de la prestation <a
+            href="/services/charpente">charpente</a
+          >.
+        </p>
+        <p>
+          Enfin, une gouttière se bouche d'autant plus vite que la toiture est
+          couverte de mousse : les fragments arrachés par la pluie descendent
+          directement dans les évacuations. Un <a
+            href="/services/nettoyage-toiture">nettoyage de toiture</a
+          > réduit très nettement la fréquence des curages.
+        </p>
+      </div>
+    </div>
+  </section>
+</ServiceLayout>

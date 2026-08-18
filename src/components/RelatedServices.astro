@@ -1,0 +1,53 @@
+---
+import Icon from "./Icon.astro";
+import Card from "./Card.astro";
+import SectionHeading from "./SectionHeading.astro";
+import { SERVICES } from "../site.config";
+
+interface Props {
+  /** Slug de la page courante, exclu de la liste. */
+  current: string;
+  /** Nombre de prestations affichées. */
+  limit?: number;
+  title?: string;
+}
+
+const {
+  current,
+  limit = 3,
+  title = "Les autres prestations",
+} = Astro.props;
+
+const related = SERVICES.filter((service) => service.slug !== current).slice(
+  0,
+  limit,
+);
+---
+
+<section aria-labelledby="related-services" class="bg-cream py-16 md:py-24">
+  <div class="container-site">
+    <SectionHeading
+      eyebrow="Maillage"
+      title={title}
+      id="related-services"
+      intro="Une toiture se traite rarement en un seul poste. Voici les interventions qui reviennent le plus souvent avec celle-ci."
+    />
+
+    <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+      {
+        related.map((service) => (
+          <Card href={service.href}>
+            <h3 class="h3-site">{service.cardTitle}</h3>
+            <p class="mt-2 text-[15px] leading-[1.6] text-ink-600">
+              {service.cardText}
+            </p>
+            <span class="mt-4 inline-flex items-center gap-1.5 text-[15px] font-semibold text-tuile-600">
+              Voir la prestation
+              <Icon name="arrow-right" size={16} />
+            </span>
+          </Card>
+        ))
+      }
+    </div>
+  </div>
+</section>

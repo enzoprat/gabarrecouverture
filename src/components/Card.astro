@@ -1,0 +1,22 @@
+---
+interface Props {
+  href?: string;
+  class?: string;
+  tone?: "white" | "cream";
+}
+
+const { href, class: className = "", tone = "white" } = Astro.props;
+
+const base =
+  "block rounded-[10px] border border-line p-6 shadow-[0_1px_2px_rgba(0,0,0,.04)] transition-colors duration-150";
+const tones: Record<string, string> = {
+  white: "bg-white",
+  cream: "bg-cream",
+};
+const interactive = href ? "hover:border-tuile-600" : "";
+const Tag = href ? "a" : "div";
+---
+
+<Tag href={href} class:list={[base, tones[tone], interactive, className]}>
+  <slot />
+</Tag>

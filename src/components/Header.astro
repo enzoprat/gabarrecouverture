@@ -1,0 +1,201 @@
+---
+import Icon from "./Icon.astro";
+import CallButton from "./CallButton.astro";
+import { BUSINESS, CTA_ARIA, NAV, SERVICES } from "../site.config";
+
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+const isActive = (href: string) =>
+  href === "/services/couverture"
+    ? path.startsWith("/services")
+    : path === href.replace(/\/$/, "");
+---
+
+<header
+  id="site-header"
+  class="sticky top-0 z-50 border-b border-line bg-white/95 backdrop-blur-[2px] transition-[padding] duration-150"
+>
+  <div class="container-site">
+    <div
+      id="header-inner"
+      class="flex items-center justify-between gap-6 py-4 transition-[padding] duration-150 md:py-5"
+    >
+      <a href="/" class="flex shrink-0 items-center gap-2.5">
+        <span
+          class="flex h-9 w-9 items-center justify-center rounded-[8px] bg-ink-950 text-white"
+          aria-hidden="true"
+        >
+          <Icon name="roof" size={20} />
+        </span>
+        <span class="leading-tight">
+          <span class="block text-[17px] font-extrabold tracking-[-0.02em] text-ink-950"
+            >Gabarre</span
+          >
+          <span class="block text-[11px] font-medium uppercase tracking-[0.08em] text-ink-400"
+            >Couverture</span
+          >
+        </span>
+        <span class="sr-only">, retour à l'accueil</span>
+      </a>
+
+      <nav aria-label="Navigation principale" class="hidden lg:block">
+        <ul class="flex items-center gap-7">
+          {
+            NAV.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  aria-current={isActive(item.href) ? "page" : undefined}
+                  class:list={[
+                    "text-[15px] font-medium transition-colors duration-150 hover:text-tuile-600",
+                    isActive(item.href) ? "text-tuile-600" : "text-ink-800",
+                  ]}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <div class="flex shrink-0 items-center gap-3">
+        <a
+          href={BUSINESS.phoneHref}
+          aria-label={CTA_ARIA}
+          data-call-link
+          class="hidden text-[17px] font-bold tracking-[-0.01em] text-ink-950 transition-colors duration-150 hover:text-tuile-600 md:block lg:hidden xl:block"
+        >
+          {BUSINESS.phoneDisplay}
+        </a>
+        <span class="hidden md:block">
+          <CallButton />
+        </span>
+        <button
+          type="button"
+          id="menu-open"
+          aria-label="Ouvrir le menu"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          class="flex h-11 w-11 shrink-0 items-center justify-center rounded-[8px] border border-line text-ink-950 transition-colors duration-150 hover:border-ink-400 lg:hidden"
+        >
+          <Icon name="menu" size={22} />
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div
+  id="mobile-menu"
+  hidden
+  class="fixed inset-0 z-[60] bg-white lg:hidden"
+>
+  <div class="flex h-full flex-col">
+    <div class="container-site">
+      <div class="flex items-center justify-between py-4">
+        <span class="text-[17px] font-extrabold tracking-[-0.02em] text-ink-950"
+          >Gabarre Couverture</span
+        >
+        <button
+          type="button"
+          id="menu-close"
+          aria-label="Fermer le menu"
+          class="flex h-11 w-11 items-center justify-center rounded-[8px] border border-line text-ink-950"
+        >
+          <Icon name="close" size={22} />
+        </button>
+      </div>
+    </div>
+
+    <div class="container-site flex-1 overflow-y-auto pb-10">
+      <CallButton size="lg" full class="mt-2" />
+      <p class="mt-3 text-center text-[14px] text-ink-400">
+        Devis gratuit, réponse directe.
+      </p>
+
+      <nav aria-label="Navigation mobile" class="mt-8">
+        <p class="eyebrow mb-3">Prestations</p>
+        <ul class="border-t border-line">
+          {
+            SERVICES.map((service) => (
+              <li class="border-b border-line">
+                <a
+                  href={service.href}
+                  class="flex items-center justify-between py-3.5 text-[17px] font-medium text-ink-950"
+                >
+                  {service.navLabel}
+                  <Icon name="chevron-right" size={18} class="text-ink-400" />
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+
+        <p class="eyebrow mt-8 mb-3">Le site</p>
+        <ul class="border-t border-line">
+          <li class="border-b border-line">
+            <a
+              href="/"
+              class="flex items-center justify-between py-3.5 text-[17px] font-medium text-ink-950"
+            >
+              Accueil
+              <Icon name="chevron-right" size={18} class="text-ink-400" />
+            </a>
+          </li>
+          {
+            NAV.filter((i) => !i.href.startsWith("/services")).map((item) => (
+              <li class="border-b border-line">
+                <a
+                  href={item.href}
+                  class="flex items-center justify-between py-3.5 text-[17px] font-medium text-ink-950"
+                >
+                  {item.label}
+                  <Icon name="chevron-right" size={18} class="text-ink-400" />
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<script>
+  const openBtn = document.getElementById("menu-open");
+  const closeBtn = document.getElementById("menu-close");
+  const menu = document.getElementById("mobile-menu");
+  const inner = document.getElementById("header-inner");
+
+  function setMenu(open: boolean) {
+    if (!menu || !openBtn) return;
+    menu.hidden = !open;
+    openBtn.setAttribute("aria-expanded", String(open));
+    document.documentElement.style.overflow = open ? "hidden" : "";
+    if (open) {
+      const first = menu.querySelector<HTMLElement>("a, button");
+      first?.focus();
+    } else {
+      openBtn.focus();
+    }
+  }
+
+  openBtn?.addEventListener("click", () => setMenu(true));
+  closeBtn?.addEventListener("click", () => setMenu(false));
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && menu && !menu.hidden) setMenu(false);
+  });
+
+  let compact = false;
+  function onScroll() {
+    const next = window.scrollY > 24;
+    if (next === compact || !inner) return;
+    compact = next;
+    inner.classList.toggle("py-4", !compact);
+    inner.classList.toggle("md:py-5", !compact);
+    inner.classList.toggle("py-2.5", compact);
+    inner.classList.toggle("md:py-3", compact);
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+</script>

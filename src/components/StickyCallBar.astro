@@ -1,0 +1,18 @@
+---
+import Icon from "./Icon.astro";
+import { BUSINESS, CTA_ARIA, CTA_LABEL } from "../site.config";
+---
+
+<div
+  class="fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-ink-950 pb-[env(safe-area-inset-bottom,0px)] md:hidden"
+>
+  <a
+    href={BUSINESS.phoneHref}
+    aria-label={CTA_ARIA}
+    data-call-link
+    class="flex h-14 w-full items-center justify-center gap-2.5 bg-tuile-600 text-[16px] font-semibold text-white transition-colors duration-150 active:bg-tuile-700"
+  >
+    <Icon name="phone" size={19} />
+    <span>{CTA_LABEL}</span>
+  </a>
+</div>

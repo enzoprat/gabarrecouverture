@@ -1,0 +1,66 @@
+# Aperçu GitHub Pages
+#
+# Ce workflow ne sert qu'à donner une URL de prévisualisation publique.
+# L'hébergement de production reste Vercel, décrit dans le README.
+#
+# GitHub Pages sert un dépôt de projet sous un sous-chemin
+# (/gabarrecouverture/). Les liens du site étant absolus depuis la racine,
+# une étape de réécriture préfixe les URL du dossier dist après le build.
+# Le code source n'est pas modifié, cette réécriture ne vit que dans la CI.
+
+name: Aperçu GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run build
+
+      - name: Préfixer les URL par le sous-chemin Pages
+        env:
+          BASE: /gabarrecouverture
+        run: node .github/scripts/prefix-base.mjs dist "$BASE"
+
+      - name: Interdire l'indexation de l'aperçu
+        run: printf 'User-agent: *\nDisallow: /\n' > dist/robots.txt
+
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

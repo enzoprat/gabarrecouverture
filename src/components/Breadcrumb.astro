@@ -1,0 +1,64 @@
+---
+import Icon from "./Icon.astro";
+
+export interface Crumb {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  items: Crumb[];
+  tone?: "light" | "dark";
+}
+
+const { items, tone = "light" } = Astro.props;
+const dark = tone === "dark";
+---
+
+<nav aria-label="Fil d'Ariane" class="py-4">
+  <ol
+    class:list={[
+      "flex flex-wrap items-center gap-x-1.5 gap-y-1 text-[13px]",
+      dark ? "text-white/60" : "text-ink-400",
+    ]}
+  >
+    <li class="flex items-center gap-1.5">
+      <a
+        href="/"
+        class:list={[
+          "transition-colors duration-150",
+          dark ? "hover:text-white" : "hover:text-tuile-600",
+        ]}>Accueil</a
+      >
+      <Icon name="chevron-right" size={13} />
+    </li>
+    {
+      items.map((item, i) => (
+        <li class="flex items-center gap-1.5">
+          {item.href ? (
+            <a
+              href={item.href}
+              class:list={[
+                "transition-colors duration-150",
+                dark ? "hover:text-white" : "hover:text-tuile-600",
+              ]}
+            >
+              {item.label}
+            </a>
+          ) : (
+            <span
+              aria-current="page"
+              class:list={[
+                "font-medium",
+                dark ? "text-white/90" : "text-ink-600",
+              ]}
+            >
+              {item.label}
+            </span>
+          )}
+          {i < items.length - 1 && <Icon name="chevron-right" size={13} />}
+        </li>
+      ))
+    }
+  </ol>
+</nav>

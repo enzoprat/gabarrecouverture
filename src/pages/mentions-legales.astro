@@ -1,0 +1,114 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import { BUSINESS, SITE_URL } from "../site.config";
+
+const breadcrumb = [{ label: "Mentions légales" }];
+
+const host = SITE_URL.replace(/^https?:\/\//, "");
+
+const title = "Mentions légales | Gabarre Couverture";
+const description =
+  "Mentions légales du site Gabarre Couverture, artisan couvreur zingueur à Montauban : éditeur, hébergeur, propriété intellectuelle et assurance professionnelle.";
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical="/mentions-legales"
+  noindex
+  breadcrumb={breadcrumb}
+>
+  <PageHero
+    title="Mentions légales"
+    lead="Informations relatives à l'éditeur du site, à son hébergement et aux conditions d'utilisation."
+    breadcrumb={breadcrumb}
+    showCta={false}
+  />
+
+  <section class="bg-white py-16 md:py-24">
+    <div class="container-site">
+      <div class="prose-site max-w-3xl">
+        <h2>Éditeur du site</h2>
+        <p>
+          {BUSINESS.legalName}, entreprise artisanale de couverture, zinguerie
+          et charpente.<br />
+          Adresse : {BUSINESS.street}, {BUSINESS.postalCode}
+          {BUSINESS.city}.<br />
+          SIRET : {BUSINESS.siret}.<br />
+          Téléphone : {BUSINESS.phoneDisplay}.<br />
+          Adresse électronique : {BUSINESS.email}.
+        </p>
+        <p>
+          {"{{"}Forme juridique et, le cas échéant, capital social, numéro de
+          TVA intracommunautaire et numéro d'inscription au répertoire des
+          métiers avec le département d'immatriculation. À compléter avec les
+          documents de l'entreprise.{"}}"}
+        </p>
+
+        <h2>Directeur de la publication</h2>
+        <p>
+          {"{{"}Nom et prénom du responsable de la publication, en général le
+          dirigeant de l'entreprise.{"}}"}
+        </p>
+
+        <h2>Hébergement</h2>
+        <p>
+          Le site est hébergé par Vercel Inc., 440 N Barranca Ave #4133,
+          Covina, CA 91723, États-Unis. Site : vercel.com.
+        </p>
+
+        <h2>Assurance professionnelle</h2>
+        <p>
+          L'entreprise est couverte par une assurance de responsabilité civile
+          décennale : {BUSINESS.insurance}. Cette garantie s'applique aux
+          travaux réalisés en France métropolitaine. L'attestation est jointe à
+          chaque devis, avant signature.
+        </p>
+
+        <h2>Propriété intellectuelle</h2>
+        <p>
+          L'ensemble des contenus présents sur {host}, textes, photographies,
+          illustrations et éléments graphiques, est la propriété de {
+            BUSINESS.legalName
+          } ou de ses ayants droit. Toute reproduction, représentation ou
+          diffusion, totale ou partielle, sans autorisation écrite préalable
+          est interdite.
+        </p>
+
+        <h2>Prix et informations affichés</h2>
+        <p>
+          Les fourchettes de prix indiquées sur ce site sont données à titre
+          purement indicatif. Elles ne constituent pas une offre commerciale et
+          ne valent en aucun cas devis. Seul un devis écrit, établi après visite
+          de la toiture et accepté par les deux parties, engage l'entreprise.
+        </p>
+
+        <h2>Liens externes</h2>
+        <p>
+          Ce site peut contenir des liens vers des sites tiers. {
+            BUSINESS.legalName
+          } n'exerce aucun contrôle sur ces sites et décline toute
+          responsabilité quant à leur contenu.
+        </p>
+
+        <h2>Données personnelles</h2>
+        <p>
+          Ce site ne comporte aucun formulaire et ne collecte aucune donnée
+          personnelle. Les modalités sont détaillées sur la page <a
+            href="/politique-confidentialite">politique de confidentialité</a
+          >.
+        </p>
+
+        <h2>Médiation de la consommation</h2>
+        <p>
+          Conformément à l'article L.612-1 du code de la consommation, tout
+          consommateur a le droit de recourir gratuitement à un médiateur de la
+          consommation en vue de la résolution amiable d'un litige. {"{{"}Nom et
+          coordonnées du médiateur auquel l'entreprise a adhéré, à indiquer une
+          fois l'adhésion souscrite.{"}}"}
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

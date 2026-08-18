@@ -1,0 +1,202 @@
+---
+import ServiceLayout from "../../layouts/ServiceLayout.astro";
+import type { FaqItem } from "../../components/Faq.astro";
+import image from "../../assets/service-reparation-fuite.webp";
+
+const includes = [
+  {
+    label: "Recherche du point d'entrée",
+    text: "L'eau apparaît rarement à l'aplomb de la fuite. Elle chemine le long d'un chevron ou d'une panne avant de tomber. La recherche se fait depuis les combles puis sur la toiture.",
+  },
+  {
+    label: "Mise hors d'eau immédiate",
+    text: "Bâchage provisoire ou reprise ponctuelle dès le premier passage quand l'eau entre franchement, pour arrêter les dégâts avant la réparation définitive.",
+  },
+  {
+    label: "Reprise de solin",
+    text: "Dépose du solin décollé autour d'une souche de cheminée, engravement neuf ou bande porte-solin sur bavette, puis réétanchement. C'est la cause de fuite la plus fréquente.",
+  },
+  {
+    label: "Réparation de noue",
+    text: "Reprise ou remplacement de la noue en zinc à la jonction de deux pans, avec relevés suffisants sous les tuiles pour éviter les remontées par capillarité.",
+  },
+  {
+    label: "Remplacement de tuiles",
+    text: "Changement des tuiles fendues, gélives ou déplacées, au modèle et à la teinte existants, avec fixation des rangs exposés au vent.",
+  },
+  {
+    label: "Reprise de faîtage",
+    text: "Rescellement ou passage en faîtage à sec sur closoir ventilé quand le mortier s'est fissuré et que les faîtières bougent.",
+  },
+  {
+    label: "Reprise d'abergement",
+    text: "Réétanchement autour d'un châssis de toit, d'une sortie de VMC ou d'un conduit de poêle. Chaque pénétration de la couverture est un point à contrôler.",
+  },
+  {
+    label: "Constat écrit et photos",
+    text: "Vous recevez les photos des désordres et le descriptif des reprises réalisées. Ce document sert directement pour une déclaration de sinistre auprès de votre assureur.",
+  },
+];
+
+const steps = [
+  {
+    num: "01",
+    title: "Description au téléphone",
+    text: "Où apparaît l'eau, depuis quand, par temps de pluie seulement ou aussi après. Ces trois questions orientent déjà fortement le diagnostic et déterminent l'urgence.",
+  },
+  {
+    num: "02",
+    title: "Inspection des combles",
+    text: "On remonte le cheminement de l'eau sur les bois avant de monter sur le toit. Une trace sèche et une trace fraîche ne racontent pas la même histoire.",
+  },
+  {
+    num: "03",
+    title: "Contrôle de la toiture",
+    text: "Vérification des points singuliers en premier, solins, noues, faîtage, abergements, puis du champ de tuiles. Le milieu de pan n'est presque jamais en cause.",
+  },
+  {
+    num: "04",
+    title: "Mise hors d'eau",
+    text: "Si l'eau entre encore, la priorité est de l'arrêter, au besoin provisoirement, avant même d'établir le devis de la réparation définitive.",
+  },
+  {
+    num: "05",
+    title: "Réparation et vérification",
+    text: "Exécution de la reprise, puis contrôle à l'eau sur la zone traitée quand c'est possible, pour ne pas découvrir au prochain orage que le point d'entrée était ailleurs.",
+  },
+];
+
+const materials = [
+  {
+    name: "Bande porte-solin et bavette zinc",
+    text: "Solution durable autour d'une souche de cheminée, préférée au simple joint de mastic qui se décolle au bout de deux ou trois étés.",
+  },
+  {
+    name: "Noue en zinc façonnée",
+    text: "Pliée sur mesure à la bonne largeur, avec relevés latéraux. Une noue trop étroite déborde dès que la pluie est forte et soutenue.",
+  },
+  {
+    name: "Closoir ventilé de faîtage",
+    text: "Remplace le mortier sur un faîtage qui se descelle à répétition. Il suit les mouvements de la charpente sans fissurer et ventile la couverture.",
+  },
+  {
+    name: "Tuiles au modèle existant",
+    text: "Recherche de la tuile correspondante en teinte et en moule. Sur les modèles anciens, une tuile de récupération donne souvent un meilleur résultat qu'une neuve.",
+  },
+  {
+    name: "Écran sous-toiture",
+    text: "Pose en zone déposée quand la fuite révèle l'absence totale d'écran. Il n'a pas vocation à remplacer une couverture étanche, mais il rattrape les incidents.",
+  },
+  {
+    name: "Bâche de mise hors d'eau",
+    text: "Solution provisoire lestée et fixée, posée le jour même en cas d'urgence, le temps de programmer la réparation définitive dans de bonnes conditions.",
+  },
+];
+
+const tarifs = [
+  {
+    label: "Déplacement et recherche de fuite",
+    range: "150 à 350 €",
+    unit: "l'intervention",
+  },
+  {
+    label: "Reprise de solin de cheminée",
+    range: "250 à 700 €",
+    unit: "l'intervention",
+  },
+  {
+    label: "Remplacement de tuiles ponctuel",
+    range: "150 à 400 €",
+    unit: "l'intervention",
+  },
+  {
+    label: "Réfection de noue en zinc",
+    range: "90 à 180 €",
+    unit: "par mètre linéaire",
+  },
+  {
+    label: "Mise hors d'eau provisoire par bâchage",
+    range: "200 à 500 €",
+    unit: "l'intervention",
+  },
+];
+
+const facteurs = [
+  "L'urgence réelle, une mise hors d'eau immédiate mobilise une demi-journée hors planning.",
+  "La difficulté d'accès au point de fuite, notamment en partie haute ou derrière une souche.",
+  "La nature du désordre, une tuile à remplacer et une noue à refaire n'ont pas le même coût.",
+  "L'étendue des dégâts sur le support, un liteaunage pourri impose une dépose plus large.",
+  "La distance depuis Montauban, prise en compte dans le déplacement au-delà de la zone habituelle.",
+];
+
+const faq: FaqItem[] = [
+  {
+    q: "Pourquoi la tache au plafond n'est-elle pas sous la fuite ?",
+    a: "Parce que l'eau ne tombe pas verticalement dès qu'elle passe la couverture. Elle suit la pente d'un chevron, longe une panne, contourne un isolant, et finit par tomber au premier point bas qu'elle rencontre. Il n'est pas rare que le point d'entrée se trouve à deux ou trois mètres de la tache, parfois sur un autre pan. C'est pour cette raison que la recherche commence toujours depuis les combles, jamais depuis le plafond taché.",
+  },
+  {
+    q: "Que faire en attendant votre passage ?",
+    a: "Placez un récipient sous l'écoulement et, si vous pouvez accéder aux combles sans risque, dégagez l'isolant mouillé de la zone pour qu'il sèche au lieu de retenir l'eau contre le bois. Coupez l'électricité de la pièce concernée si l'eau approche d'un point lumineux. Prenez des photos horodatées, elles serviront pour l'assurance. Ne montez pas sur la toiture, une tuile mouillée et couverte de mousse est extrêmement glissante.",
+  },
+  {
+    q: "La réparation d'une fuite est-elle couverte par la garantie décennale ?",
+    a: "La décennale couvre les désordres liés à des travaux réalisés par l'entreprise, pendant dix ans après leur réception. Si la fuite provient d'une couverture que j'ai posée, elle est prise en charge à ce titre. Si elle provient de l'usure de votre toiture existante ou d'un épisode de vent, ce n'est pas la décennale qui joue mais votre contrat multirisque habitation. Les reprises que je réalise sont, elles, couvertes à partir de leur réception.",
+  },
+];
+---
+
+<ServiceLayout
+  slug="reparation-fuite-toiture"
+  metaTitle="Réparation fuite de toiture à Montauban (82) | Gabarre"
+  metaDescription="Recherche et réparation de fuite de toiture à Montauban et en 82 : solin, noue, faîtage, tuiles. Mise hors d'eau rapide. Devis gratuit, décennale."
+  eyebrow="Réparation de fuite"
+  h1="Réparation de fuite de toiture à Montauban"
+  lead="Recherche du point d'entrée, mise hors d'eau et réparation durable. Solin de cheminée, noue, faîtage descellé, tuiles fendues ou déplacées après un coup de vent."
+  serviceName="la réparation de fuite"
+  serviceType="Recherche et réparation de fuite de toiture"
+  image={image}
+  imageAlt="Solin de cheminée décollé sur une toiture, point d'entrée d'eau le plus fréquent"
+  includesTitle="Ce que comprend une intervention sur fuite"
+  includesIntro="Une fuite se traite en deux temps : arrêter l'eau, puis réparer la cause. Confondre les deux, c'est réparer au mauvais endroit et recommencer au prochain orage."
+  includes={includes}
+  stepsTitle="Comment on cherche et on traite une fuite"
+  steps={steps}
+  materialsTitle="Solutions de réparation"
+  materialsIntro="Une fuite se répare avec des pièces façonnées, pas avec du mastic. Voici les solutions retenues selon l'origine du désordre."
+  materials={materials}
+  pricingIntro="Les montants ci-dessous couvrent le déplacement, la recherche et la reprise, hors échafaudage et hors reprise de charpente."
+  tarifs={tarifs}
+  facteurs={facteurs}
+  faq={faq}
+>
+  <section class="bg-white py-16 md:py-24">
+    <div class="container-site">
+      <div class="prose-site max-w-3xl">
+        <h2>Après la fuite, ce qu'il faut regarder</h2>
+        <p>
+          Une fuite ponctuelle sur une toiture saine se répare et le dossier est
+          clos. Mais si le même toit fuit à trois endroits différents en deux
+          hivers, ce n'est plus un incident : la couverture arrive en fin de
+          vie. Dans ce cas, additionner les réparations coûte plus cher qu'une <a
+            href="/services/couverture">réfection de toiture</a
+          > menée d'un seul tenant.
+        </p>
+        <p>
+          Le bois touché doit aussi être contrôlé. Une infiltration qui a duré
+          plusieurs mois laisse un chevron ou une panne gorgés d'eau, terrain
+          idéal pour les champignons et les insectes. Le sondage et la reprise
+          éventuelle relèvent de la prestation <a href="/services/charpente"
+            >charpente et traitement</a
+          >.
+        </p>
+        <p>
+          Enfin, beaucoup de fuites viennent des évacuations plutôt que des
+          tuiles. Un chéneau fissuré ou une noue percée donnent exactement le
+          même symptôme au plafond. La reprise se traite alors en <a
+            href="/services/zinguerie">zinguerie</a
+          >, avec des pièces façonnées et soudées.
+        </p>
+      </div>
+    </div>
+  </section>
+</ServiceLayout>

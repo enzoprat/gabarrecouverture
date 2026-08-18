@@ -1,0 +1,107 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import BeforeAfter from "../components/BeforeAfter.astro";
+import CallCta from "../components/CallCta.astro";
+import Icon from "../components/Icon.astro";
+import { REALISATIONS } from "../data/realisations";
+import { SERVICES } from "../site.config";
+
+const breadcrumb = [{ label: "Réalisations" }];
+
+const title = "Réalisations, chantiers de toiture à Montauban | Gabarre";
+const description =
+  "Chantiers de couverture, zinguerie et démoussage réalisés à Montauban et en Tarn-et-Garonne, en photos avant et après, avec commune et matériau posé.";
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical="/realisations"
+  breadcrumb={breadcrumb}
+>
+  <PageHero
+    eyebrow="Réalisations"
+    title="Chantiers réalisés à Montauban et alentours"
+    lead="Chaque chantier est présenté avec son état de départ, la prestation réalisée, la commune et le matériau posé. Pas de photo de catalogue, uniquement des toitures sur lesquelles je suis intervenu."
+    breadcrumb={breadcrumb}
+  />
+
+  <section class="bg-white py-16 md:py-24">
+    <div class="container-site">
+      <div
+        class="mb-10 flex gap-3.5 rounded-[10px] border border-line bg-tuile-50 p-5"
+      >
+        <span class="mt-0.5 shrink-0 text-tuile-600" aria-hidden="true">
+          <Icon name="alert" size={20} />
+        </span>
+        <p class="text-[15px] leading-[1.6] text-ink-600">
+          <strong class="font-semibold text-ink-950"
+            >Contenu en attente de validation.</strong
+          > Les photos et les descriptifs de chantier doivent être fournis par l'entreprise
+          avant la mise en ligne. Les champs entre doubles accolades sont des emplacements
+          à remplir, aucun exemple n'a été inventé.
+        </p>
+      </div>
+
+      <SectionHeading
+        eyebrow="Avant et après"
+        title="Trois chantiers en détail"
+        id="chantiers"
+      />
+
+      <div class="mt-10 grid gap-6 lg:grid-cols-2">
+        {
+          REALISATIONS.map((item, index) => (
+            <BeforeAfter item={item} eager={index === 0}>
+              <p class="mt-3 text-[15px] leading-[1.65] text-ink-600">
+                {item.description}
+              </p>
+              <p class="mt-3 text-[14px] text-ink-400">
+                Durée du chantier : {item.duree}
+              </p>
+            </BeforeAfter>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-cream py-16 md:py-24">
+    <div class="container-site">
+      <SectionHeading
+        eyebrow="Prestations"
+        title="Le type de chantiers que je traite"
+        id="prestations"
+        intro="Réfection complète, reprise ponctuelle, évacuation des eaux ou entretien : la nature du chantier change complètement le déroulé et le budget."
+      />
+      <ul class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {
+          SERVICES.map((service) => (
+            <li>
+              <a
+                href={service.href}
+                class="flex h-full flex-col rounded-[10px] border border-line bg-white p-6 transition-colors duration-150 hover:border-tuile-600"
+              >
+                <h3 class="h3-site">{service.cardTitle}</h3>
+                <p class="mt-2 flex-1 text-[15px] leading-[1.6] text-ink-600">
+                  {service.cardText}
+                </p>
+                <span class="mt-5 inline-flex items-center gap-1.5 text-[15px] font-semibold text-tuile-600">
+                  Voir la prestation
+                  <Icon name="arrow-right" size={16} />
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <CallCta
+    title="Un chantier similaire chez vous"
+    text="Décrivez votre toiture par téléphone. Je vous dis ce qui se rapproche le plus de votre situation et ce que cela implique."
+  />
+</BaseLayout>

@@ -1,0 +1,202 @@
+---
+import ServiceLayout from "../../layouts/ServiceLayout.astro";
+import type { FaqItem } from "../../components/Faq.astro";
+import image from "../../assets/service-charpente.webp";
+
+const includes = [
+  {
+    label: "Diagnostic des bois depuis les combles",
+    text: "Contrôle des pannes, chevrons, arbalétriers et entraits. Sondage au poinçon des zones suspectes, repérage des trous d'envol, de la vermoulure et des traces d'humidité.",
+  },
+  {
+    label: "Remplacement de chevrons",
+    text: "Dépose partielle de la couverture, retrait du chevron atteint, pose d'un bois de même section, traité, avec reprise des fixations sur pannes.",
+  },
+  {
+    label: "Reprise de panne et de sablière",
+    text: "Remplacement ou moisage d'une panne fléchie, reprise de panne sablière pourrie en pied de versant, avec étaiement provisoire pendant l'intervention.",
+  },
+  {
+    label: "Renfort de ferme",
+    text: "Moisage d'un entrait fissuré, ajout d'une jambe de force, reprise d'un assemblage qui a joué. On conserve la structure existante chaque fois que c'est possible.",
+  },
+  {
+    label: "Traitement curatif du bois",
+    text: "Bûchage des parties attaquées, injection dans les bois de forte section et pulvérisation d'un produit homologué contre les insectes à larves xylophages et les champignons.",
+  },
+  {
+    label: "Traitement préventif",
+    text: "Application sur bois sains, notamment sur une charpente neuve ou après démoussage des combles. Elle protège contre capricornes, vrillettes et mérule.",
+  },
+  {
+    label: "Pose de bois neufs",
+    text: "Création d'un chevêtre pour un châssis de toit, reprise d'un débord de toiture, remplacement d'une planche de rive et de son support.",
+  },
+  {
+    label: "Nettoyage des combles",
+    text: "Évacuation des bois déposés, aspiration de la vermoulure et des débris. Un comble propre permet de contrôler facilement l'évolution les années suivantes.",
+  },
+];
+
+const steps = [
+  {
+    num: "01",
+    title: "Inspection et sondage",
+    text: "Visite des combles, contrôle visuel puis sondage des bois. Un chevron peut paraître sain en surface et être creux à l'intérieur, seul le poinçon le dit.",
+  },
+  {
+    num: "02",
+    title: "Identification de la cause",
+    text: "Insecte, champignon ou infiltration : la réponse n'est pas la même. Réparer un bois pourri sans traiter la fuite qui l'a mouillé ne sert à rien.",
+  },
+  {
+    num: "03",
+    title: "Étaiement et dépose",
+    text: "Mise en place des étais avant toute dépose, pour que la structure reste tenue pendant qu'on retire la pièce atteinte. C'est l'étape qui garantit la sécurité du chantier.",
+  },
+  {
+    num: "04",
+    title: "Remplacement et assemblage",
+    text: "Pose du bois neuf, à section identique ou supérieure, traité avant mise en œuvre. Assemblage par boulonnage, moisage ou connecteurs selon la configuration.",
+  },
+  {
+    num: "05",
+    title: "Traitement et remise en état",
+    text: "Application du produit sur l'ensemble de la charpente, repose de la couverture déposée, contrôle de l'étanchéité et nettoyage complet des combles.",
+  },
+];
+
+const materials = [
+  {
+    name: "Sapin et épicéa traités",
+    text: "Bois de structure courant pour les chevrons et les pannes. Traitement en classe 2 pour un bois abrité, en classe 3 dès qu'il peut être exposé à l'humidité.",
+  },
+  {
+    name: "Douglas",
+    text: "Naturellement plus durable, utilisé pour les pièces de forte section et les débords de toiture visibles. Bon compromis entre tenue mécanique et aspect.",
+  },
+  {
+    name: "Chêne",
+    text: "Réservé aux reprises sur charpentes traditionnelles anciennes, où il faut respecter la nature du bois d'origine et les assemblages en place.",
+  },
+  {
+    name: "Traitement par injection",
+    text: "Cartouches posées dans des trous forés à intervalles réguliers, pour saturer le cœur des bois de forte section. Indispensable sur une attaque de capricorne installée.",
+  },
+  {
+    name: "Traitement par pulvérisation",
+    text: "Application en surface sur l'ensemble des bois accessibles, en complément de l'injection ou seule en préventif. Produit homologué, appliqué en deux passes.",
+  },
+  {
+    name: "Connecteurs et étriers métalliques",
+    text: "Sabots, équerres et boulons galvanisés pour reprendre un assemblage fatigué sans déposer toute la ferme. Solution propre et contrôlable dans le temps.",
+  },
+];
+
+const tarifs = [
+  {
+    label: "Remplacement d'un chevron",
+    range: "80 à 200 €",
+    unit: "par unité",
+  },
+  {
+    label: "Reprise de panne ou de sablière",
+    range: "150 à 400 €",
+    unit: "par mètre linéaire",
+  },
+  {
+    label: "Traitement curatif de charpente",
+    range: "25 à 55 €",
+    unit: "par m² au sol",
+  },
+  {
+    label: "Traitement préventif",
+    range: "12 à 25 €",
+    unit: "par m² au sol",
+  },
+  {
+    label: "Renfort de ferme par moisage",
+    range: "400 à 1 200 €",
+    unit: "par ferme",
+  },
+];
+
+const facteurs = [
+  "L'accessibilité des combles : un comble perdu bas de plafond ralentit fortement le travail.",
+  "L'étendue de l'attaque, quelques chevrons ponctuels ou une charpente entière à traiter.",
+  "La nécessité de déposer une partie de la couverture pour atteindre les bois.",
+  "La section et l'essence des bois à remplacer, le chêne coûte nettement plus cher que le sapin.",
+  "La présence d'un isolant à déposer et à reposer avant et après intervention.",
+];
+
+const faq: FaqItem[] = [
+  {
+    q: "Comment savoir si ma charpente est attaquée par les insectes ?",
+    a: "Trois indices se repèrent depuis les combles. Des trous d'envol de deux à dix millimètres à la surface du bois, une sciure fine, la vermoulure, au pied des pièces ou sur l'isolant, et un bois qui sonne creux quand on le frappe. Le capricorne creuse à l'intérieur en laissant une pellicule intacte en surface, ce qui rend l'attaque invisible sans sondage. Au moindre doute, un contrôle au poinçon tranche en quelques minutes.",
+  },
+  {
+    q: "Faut-il traiter toute la charpente ou seulement les bois atteints ?",
+    a: "Le traitement se fait toujours sur l'ensemble des bois accessibles, pas uniquement sur les pièces attaquées. Les larves circulent d'une pièce à l'autre et une zone non traitée sert de réservoir pour une réinfestation. En revanche, l'injection, plus coûteuse, se concentre sur les bois de forte section où la pulvérisation ne pénètre pas suffisamment. Cette distinction figure clairement au devis, ligne par ligne.",
+  },
+  {
+    q: "Peut-on réparer une charpente sans déposer la couverture ?",
+    a: "Souvent oui, quand l'intervention porte sur les pannes, les entraits ou les assemblages, accessibles par l'intérieur des combles. En revanche, remplacer un chevron impose de découvrir la zone concernée, puisque le liteaunage y est cloué. Dans ce cas, on découvre une bande limitée et on referme le jour même. Le devis précise systématiquement si une dépose partielle de couverture est prévue, et sur quelle surface.",
+  },
+];
+---
+
+<ServiceLayout
+  slug="charpente"
+  metaTitle="Charpentier à Montauban (82), réparation | Gabarre"
+  metaDescription="Réparation de charpente à Montauban : chevrons, pannes, renfort de ferme, traitement contre les insectes xylophages. Devis gratuit, décennale."
+  eyebrow="Charpente"
+  h1="Charpente, réparation et traitement à Montauban"
+  lead="Remplacement de chevrons et de pannes, renfort de ferme, reprise de sablière et traitement contre les insectes à larves xylophages. Sur charpente traditionnelle comme sur fermettes industrielles."
+  serviceName="la charpente"
+  serviceType="Réparation, renfort et traitement de charpente"
+  image={image}
+  imageAlt="Charpente traditionnelle en bois vue depuis les combles avant traitement"
+  includesTitle="Ce que comprend la prestation charpente"
+  includesIntro="Une charpente ne se remplace presque jamais en totalité. Le travail consiste à identifier les pièces atteintes, à les reprendre et à traiter l'ensemble pour arrêter le phénomène."
+  includes={includes}
+  stepsTitle="Comment on procède sur une charpente"
+  steps={steps}
+  materialsTitle="Essences de bois et traitements"
+  materialsIntro="Le bois de remplacement se choisit selon la pièce à reprendre et l'exposition à l'humidité. Le traitement se décide selon la nature de l'attaque constatée."
+  materials={materials}
+  pricingIntro="Les montants ci-dessous couvrent la fourniture, la pose et l'évacuation des bois déposés, hors dépose de couverture."
+  tarifs={tarifs}
+  facteurs={facteurs}
+  faq={faq}
+>
+  <section class="bg-white py-16 md:py-24">
+    <div class="container-site">
+      <div class="prose-site max-w-3xl">
+        <h2>Pourquoi une charpente s'abîme</h2>
+        <p>
+          Dans la grande majorité des cas, le bois n'est pas en cause. Il souffre
+          parce que l'eau arrive jusqu'à lui. Une tuile cassée, un écran
+          sous-toiture absent ou un solin décollé suffisent à entretenir une
+          humidité permanente qui attire les champignons et ramollit le bois. La
+          reprise de charpente n'a donc de sens qu'associée à une <a
+            href="/services/couverture">couverture remise en état</a
+          >.
+        </p>
+        <p>
+          Le deuxième coupable est l'évacuation des eaux. Un chéneau encaissé
+          fissuré ou une gouttière qui déborde arrose la panne sablière à chaque
+          pluie, en pied de versant, là où on ne regarde jamais. La reprise des
+          évacuations relève de la <a href="/services/zinguerie">zinguerie</a>,
+          et se traite au même moment que la charpente.
+        </p>
+        <p>
+          Si vous constatez déjà une trace d'humidité dans les combles, le sujet
+          est d'abord une <a href="/services/reparation-fuite-toiture"
+            >recherche de fuite</a
+          >. Traiter le bois avant d'avoir arrêté l'eau revient à traiter le
+          symptôme.
+        </p>
+      </div>
+    </div>
+  </section>
+</ServiceLayout>

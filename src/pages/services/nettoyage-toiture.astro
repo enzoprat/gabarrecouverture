@@ -1,0 +1,195 @@
+---
+import ServiceLayout from "../../layouts/ServiceLayout.astro";
+import type { FaqItem } from "../../components/Faq.astro";
+import image from "../../assets/service-nettoyage-toiture.webp";
+
+const includes = [
+  {
+    label: "Démoussage manuel",
+    text: "Grattage à la raclette et à la brosse des amas de mousse et de lichen, tuile par tuile. C'est plus long qu'un passage au jet, mais c'est ce qui préserve la couche superficielle de la terre cuite.",
+  },
+  {
+    label: "Rinçage basse pression",
+    text: "Nettoyage à pression maîtrisée, du faîtage vers l'égout. Le nettoyeur haute pression est proscrit sur tuile ancienne : il décape l'engobe et ouvre la porosité.",
+  },
+  {
+    label: "Traitement anti-mousse",
+    text: "Pulvérisation d'un produit fongicide et algicide sur l'ensemble des pans. Il détruit les spores restantes et retarde la réapparition de la mousse.",
+  },
+  {
+    label: "Application d'un hydrofuge",
+    text: "Imperméabilisant incolore ou coloré, appliqué en deux passes croisées après séchage complet. Il fait perler l'eau et empêche la tuile de se recharger en humidité.",
+  },
+  {
+    label: "Curage des gouttières et chéneaux",
+    text: "Retrait des débris de mousse tombés pendant le chantier, contrôle de l'écoulement et pose de crapaudines si les descentes se bouchent régulièrement.",
+  },
+  {
+    label: "Contrôle de la couverture",
+    text: "Une fois la toiture propre, les tuiles fendues, déplacées ou gélives deviennent visibles. Le constat vous est remis avec les photos, sans obligation de suite.",
+  },
+  {
+    label: "Remplacement des tuiles cassées",
+    text: "Les tuiles hors service repérées pendant le nettoyage sont changées dans la foulée, tant que le chantier est installé. C'est le moment où cela coûte le moins cher.",
+  },
+  {
+    label: "Protection des abords",
+    text: "Bâchage des plantations sensibles, des terrasses et du mobilier, puis ramassage complet des résidus de mousse au sol en fin de chantier.",
+  },
+];
+
+const steps = [
+  {
+    num: "01",
+    title: "Contrôle préalable de l'état des tuiles",
+    text: "Une toiture très gélive ou dont les tuiles bougent ne se nettoie pas de la même façon. Si l'état ne le permet pas, je vous le dis avant, plutôt que de fragiliser la couverture.",
+  },
+  {
+    num: "02",
+    title: "Démoussage mécanique",
+    text: "Grattage manuel des amas les plus épais, en descendant du faîtage vers l'égout, avec ligne de vie ou échafaudage selon la pente et la hauteur.",
+  },
+  {
+    num: "03",
+    title: "Rinçage et évacuation",
+    text: "Passage à basse pression pour retirer les résidus, puis curage immédiat des gouttières et des descentes, qui reçoivent tout ce qui descend.",
+  },
+  {
+    num: "04",
+    title: "Traitement anti-mousse",
+    text: "Pulvérisation sur toiture propre et sèche. Selon le produit, l'action se poursuit plusieurs semaines et la mousse morte finit d'être emportée par la pluie.",
+  },
+  {
+    num: "05",
+    title: "Hydrofuge en deux passes",
+    text: "Application croisée après séchage complet, par temps sec et sans vent. Le rendu peut être incolore, pour garder l'aspect d'origine, ou coloré pour uniformiser la teinte.",
+  },
+];
+
+const materials = [
+  {
+    name: "Traitement anti-mousse curatif",
+    text: "Produit fongicide et algicide sans rinçage, appliqué par pulvérisation. Il continue d'agir plusieurs semaines après le passage et évite une repousse rapide.",
+  },
+  {
+    name: "Hydrofuge incolore",
+    text: "Imperméabilisant à base de résine siloxane. L'eau perle et ne pénètre plus dans la tuile, ce qui limite le gel et l'accroche des mousses, sans modifier la couleur.",
+  },
+  {
+    name: "Hydrofuge coloré",
+    text: "Même principe, avec un pigment qui uniformise une toiture aux tuiles dépareillées après plusieurs réparations. À réserver aux couvertures homogènes en état correct.",
+  },
+  {
+    name: "Nettoyage sans hydrofuge",
+    text: "Option la moins chère, adaptée si vous prévoyez une réfection à court terme ou si la toiture est peu exposée. La mousse revient simplement plus vite.",
+  },
+  {
+    name: "Crapaudines et pare-feuilles",
+    text: "Posées en tête de descente pendant le chantier. Elles évitent que les résidus de mousse et les feuilles ne rebouchent les évacuations dans les mois qui suivent.",
+  },
+  {
+    name: "Tuiles de remplacement",
+    text: "Stock de tuiles au modèle et à la teinte de la couverture, pour changer immédiatement les éléments fendus repérés pendant le nettoyage.",
+  },
+];
+
+const tarifs = [
+  {
+    label: "Démoussage et rinçage seuls",
+    range: "12 à 22 €",
+    unit: "par m² de toiture",
+  },
+  {
+    label: "Démoussage et traitement anti-mousse",
+    range: "16 à 28 €",
+    unit: "par m² de toiture",
+  },
+  {
+    label: "Démoussage, traitement et hydrofuge",
+    range: "22 à 40 €",
+    unit: "par m² de toiture",
+  },
+  {
+    label: "Curage de gouttières seul",
+    range: "3 à 8 €",
+    unit: "par mètre linéaire",
+  },
+];
+
+const facteurs = [
+  "L'épaisseur de la mousse, une toiture jamais nettoyée demande deux à trois fois plus de temps de grattage.",
+  "La pente et la hauteur, qui déterminent le dispositif de sécurité, ligne de vie, échafaudage ou nacelle.",
+  "Le type de tuile, une canal ancienne se travaille plus lentement qu'une mécanique plate.",
+  "L'option retenue, le seul hydrofuge représente une part importante du montant final.",
+  "L'environnement immédiat, plantations à protéger, piscine, terrasse ou accès difficile pour le matériel.",
+];
+
+const faq: FaqItem[] = [
+  {
+    q: "Le nettoyeur haute pression abîme-t-il les tuiles ?",
+    a: "Sur une tuile ancienne, oui. La haute pression décape l'engobe, cette couche de surface qui limite la porosité de la terre cuite. Une fois partie, la tuile absorbe davantage d'eau, gèle plus facilement et se recouvre de mousse plus vite qu'avant le nettoyage. Le jet peut aussi faire remonter de l'eau sous les recouvrements. Le démoussage se fait donc à la main, avec un rinçage à pression maîtrisée du haut vers le bas.",
+  },
+  {
+    q: "L'hydrofuge est-il vraiment utile ?",
+    a: "Il l'est sur une toiture en tuile terre cuite poreuse, exposée au nord ou entourée d'arbres. En faisant perler l'eau, il empêche la tuile de se gorger d'humidité, ce qui réduit le risque d'éclatement au gel et prive la mousse du support humide dont elle a besoin. Sur une toiture bien exposée, en bon état et déjà peu encrassée, le gain est plus modeste. Il n'a en revanche aucun intérêt sur une tuile déjà gélive.",
+  },
+  {
+    q: "Quelle est la meilleure période pour démousser une toiture ?",
+    a: "Le printemps et le début de l'automne. Il faut plusieurs jours secs d'affilée, une température douce et pas de vent le jour du traitement, faute de quoi le produit se disperse. L'été est possible mais les fortes chaleurs font sécher le produit trop vite en surface. L'hiver est à éviter, une tuile gorgée d'eau puis exposée au gel juste après un nettoyage est dans les pires conditions.",
+  },
+];
+---
+
+<ServiceLayout
+  slug="nettoyage-toiture"
+  metaTitle="Démoussage de toiture à Montauban (82) | Gabarre"
+  metaDescription="Démoussage manuel, traitement anti-mousse et hydrofuge de toiture à Montauban et en Tarn-et-Garonne. Tuile canal et terre cuite. Devis gratuit, décennale."
+  eyebrow="Nettoyage de toiture"
+  h1="Nettoyage et démoussage de toiture à Montauban"
+  lead="Démoussage manuel, rinçage basse pression, traitement anti-mousse et hydrofuge de protection. Sur tuile canal, tuile mécanique et ardoise, sans nettoyeur haute pression."
+  serviceName="le nettoyage de toiture"
+  serviceType="Démoussage, nettoyage et hydrofuge de toiture"
+  image={image}
+  imageAlt="Pan de toiture en tuile canal partiellement démoussé, mousse encore présente à droite"
+  includesTitle="Ce que comprend un démoussage de toiture"
+  includesIntro="Le nettoyage n'est pas qu'une question d'aspect. La mousse retient l'eau contre la terre cuite et c'est cette humidité permanente qui fait éclater les tuiles au premier gel."
+  includes={includes}
+  stepsTitle="Comment se déroule un chantier de démoussage"
+  steps={steps}
+  materialsTitle="Produits et options"
+  materialsIntro="Trois niveaux de prestation existent, du simple démoussage au traitement complet avec hydrofuge. Le bon choix dépend de l'exposition de la toiture et de son état réel."
+  materials={materials}
+  pricingIntro="Les montants ci-dessous s'entendent par mètre carré de toiture développée, protections et évacuation des résidus comprises."
+  tarifs={tarifs}
+  facteurs={facteurs}
+  faq={faq}
+>
+  <section class="bg-white py-16 md:py-24">
+    <div class="container-site">
+      <div class="prose-site max-w-3xl">
+        <h2>Ce qu'un nettoyage révèle, et ce qu'il ne répare pas</h2>
+        <p>
+          Une toiture propre se lit enfin correctement. Les tuiles fendues, les
+          rangs qui ont glissé et les solins ouverts apparaissent alors qu'ils
+          étaient masqués par la mousse. Quand les désordres dépassent quelques
+          tuiles, le sujet devient une reprise de <a
+            href="/services/couverture">couverture</a
+          >, et le démoussage n'a plus grand intérêt seul.
+        </p>
+        <p>
+          Un démoussage ne traite pas non plus une entrée d'eau existante. Si
+          une tache est déjà visible au plafond ou dans les combles, la priorité
+          est la <a href="/services/reparation-fuite-toiture"
+            >réparation de la fuite</a
+          >. Le nettoyage se fait ensuite, une fois la toiture rendue étanche.
+        </p>
+        <p>
+          Prévoyez enfin ce que devient la mousse arrachée : elle descend
+          intégralement dans les gouttières. Le curage fait partie du chantier,
+          et si les évacuations sont déjà fatiguées, c'est le bon moment pour
+          les reprendre en <a href="/services/zinguerie">zinguerie</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</ServiceLayout>

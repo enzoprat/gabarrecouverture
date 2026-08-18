@@ -1,0 +1,478 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CallButton from "../components/CallButton.astro";
+import CallCta from "../components/CallCta.astro";
+import Card from "../components/Card.astro";
+import DecennaleBanner from "../components/DecennaleBanner.astro";
+import Faq from "../components/Faq.astro";
+import type { FaqItem } from "../components/Faq.astro";
+import Icon from "../components/Icon.astro";
+import type { IconName } from "../components/Icon.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import BeforeAfter from "../components/BeforeAfter.astro";
+import heroImage from "../assets/hero-toiture-montauban.webp";
+import { REALISATIONS } from "../data/realisations";
+import { localBusinessLd } from "../lib/schema";
+import {
+  BUSINESS,
+  COMMUNES,
+  CTA_ARIA,
+  CTA_LABEL,
+  CTA_REASSURANCE,
+  SERVICES,
+} from "../site.config";
+
+const metiers: { icon: IconName; slug: string }[] = [
+  { icon: "roof", slug: "couverture" },
+  { icon: "gutter", slug: "zinguerie" },
+  { icon: "beam", slug: "charpente" },
+  { icon: "moss", slug: "nettoyage-toiture" },
+];
+
+const metierCards = metiers.map((metier) => ({
+  ...metier,
+  ...SERVICES.find((service) => service.slug === metier.slug)!,
+}));
+
+const arguments4: { icon: IconName; title: string; text: string }[] = [
+  {
+    icon: "user",
+    title: "L'artisan qui monte sur le toit est celui qui vous répond",
+    text: "Pas de sous-traitance en cascade. Vous avez le même interlocuteur du premier appel au dernier coup de balai, ce qui évite les informations perdues entre le commercial et l'équipe de pose.",
+  },
+  {
+    icon: "file-text",
+    title: "Un devis détaillé et ferme",
+    text: "Chaque poste est chiffré séparément, avec les quantités en mètres carrés et en mètres linéaires. Le montant ne bouge pas, sauf si vous demandez vous-même une modification, actée par écrit.",
+  },
+  {
+    icon: "check",
+    title: "Matériaux et finitions écrits au devis",
+    text: "Modèle et teinte de tuile, nature du zinc, type d'écran sous-toiture, traitement de la charpente : tout figure noir sur blanc. Vous savez ce qui sera posé avant de signer.",
+  },
+  {
+    icon: "broom",
+    title: "Chantier laissé propre",
+    text: "Bâchage des abords, benne sur place quand le volume le justifie, évacuation des gravats en déchèterie professionnelle et passage d'un aimant au sol pour récupérer clous et chutes de zinc.",
+  },
+];
+
+const alertes: { icon: IconName; signe: string; consequence: string }[] = [
+  {
+    icon: "alert",
+    signe: "Des tuiles déplacées après un coup de vent",
+    consequence:
+      "L'eau passe sous la rangée suivante et détrempe le liteau puis le chevron. Le désordre reste invisible depuis le sol pendant des mois.",
+  },
+  {
+    icon: "leak",
+    signe: "Des auréoles ou des traces d'humidité dans les combles",
+    consequence:
+      "L'infiltration dure déjà depuis un moment. La charpente se gorge d'eau et l'isolant tassé perd l'essentiel de son efficacité thermique.",
+  },
+  {
+    icon: "moss",
+    signe: "Une mousse épaisse, surtout sur le pan nord",
+    consequence:
+      "La mousse retient l'eau contre la terre cuite. Au premier gel, l'eau piégée fait éclater la tuile en surface et le phénomène s'accélère.",
+  },
+  {
+    icon: "gutter",
+    signe: "Une gouttière qui déborde à chaque grosse pluie",
+    consequence:
+      "L'eau ruisselle le long du mur au lieu d'être évacuée. La façade se tache et le pied de mur reste humide en permanence.",
+  },
+  {
+    icon: "roof",
+    signe: "Des tuiles fendues ou effritées visibles depuis le sol",
+    consequence:
+      "Chaque tuile fendue est un point d'entrée. Une seule tuile coûte peu à remplacer, un liteaunage pourri sur trois mètres coûte beaucoup plus.",
+  },
+  {
+    icon: "beam",
+    signe: "Une trace d'infiltration autour de la cheminée",
+    consequence:
+      "Le solin s'est décollé du conduit. C'est le point de fuite le plus fréquent sur une toiture, et l'eau descend directement le long de la souche.",
+  },
+];
+
+const etapes = [
+  {
+    num: "01",
+    title: "Vous appelez et vous décrivez le problème",
+    text: "Fuite, mousse, tuiles envolées, projet de réfection : on cadre le sujet au téléphone. Quelques questions suffisent souvent à savoir si le passage sur place est nécessaire et sous quel délai.",
+  },
+  {
+    num: "02",
+    title: "Visite et diagnostic sur place",
+    text: "Montée sur toiture, contrôle de la couverture, des points singuliers, des évacuations et de l'état de la charpente depuis les combles. Vous recevez le constat en direct, photos à l'appui.",
+  },
+  {
+    num: "03",
+    title: "Devis détaillé remis rapidement",
+    text: "Postes séparés, quantités, matériaux nommés, durée estimée et modalités de règlement. L'attestation de garantie décennale est jointe. Vous prenez le temps de comparer.",
+  },
+  {
+    num: "04",
+    title: "Intervention et nettoyage du chantier",
+    text: "Installation, protection des abords, réalisation des travaux, contrôle d'étanchéité et remise en état du terrain. Les gravats partent avec nous, rien ne reste devant chez vous.",
+  },
+];
+
+const faqItems: FaqItem[] = [
+  {
+    q: "Combien coûte une réfection de toiture au mètre carré ?",
+    a: "Une réfection complète, dépose de l'ancienne couverture comprise, se situe le plus souvent entre 80 et 150 euros par mètre carré en tuile terre cuite, pose et évacuation incluses. Le montant monte si la charpente doit être reprise, si un écran sous-toiture est ajouté ou si l'accès au chantier est difficile. Un simple remaniage, sans changement de tuiles, revient nettement moins cher. Ces ordres de grandeur sont indicatifs : seul un devis établi après montée sur toiture engage un chiffre.",
+  },
+  {
+    q: "Combien de temps dure un chantier de couverture ?",
+    a: "Pour une maison individuelle de 100 à 120 mètres carrés de toiture, une réfection complète demande en général une à deux semaines de travail, si la météo le permet. Un remaniage ou un remplacement de tuiles cassées se règle souvent en une à trois journées. Un démoussage tient sur une journée. Une reprise de charpente allonge systématiquement le chantier, puisqu'il faut déposer la couverture avant d'atteindre les pièces de bois. La durée estimée figure sur le devis.",
+  },
+  {
+    q: "Faut-il déclarer les travaux de toiture en mairie ?",
+    a: "Dans la plupart des cas, oui. Dès que les travaux modifient l'aspect extérieur du bâtiment, changement de modèle de tuile, de teinte ou de matériau, une déclaration préalable de travaux est à déposer en mairie. Un remplacement strictement à l'identique n'y est en principe pas soumis, mais les règles varient selon le plan local d'urbanisme et le secteur, en particulier aux abords des monuments historiques de Montauban. Appelez le service urbanisme de votre commune avant de lancer le chantier.",
+  },
+  {
+    q: "Puis-je bénéficier de la TVA à 10 % et d'aides ?",
+    a: "Sur un logement achevé depuis plus de deux ans, les travaux de rénovation de toiture relèvent de la TVA à 10 %, appliquée directement sur le devis et la facture. Vous signez simplement une attestation. Le taux de 5,5 % concerne les travaux d'amélioration énergétique, par exemple une isolation posée en même temps que la couverture. Les aides publiques évoluent souvent : renseignez-vous auprès de France Rénov' avant de démarrer, une couverture seule n'y ouvre généralement pas droit.",
+  },
+  {
+    q: "À quelle fréquence faut-il démousser une toiture ?",
+    a: "Dans le Sud-Ouest, sur tuile canal ou tuile terre cuite, un démoussage tous les cinq à dix ans suffit dans la plupart des situations. Le rythme se resserre si la toiture est exposée au nord, peu ensoleillée, ou bordée d'arbres qui la maintiennent humide et la couvrent de feuilles. Un pan plein sud et dégagé s'encrasse beaucoup plus lentement. Le repère reste visuel : mousse épaisse, tuiles qui retiennent l'eau, gouttières qui se chargent de débris.",
+  },
+  {
+    q: "En combien de temps intervenez-vous en cas de fuite ?",
+    a: "Une fuite passe en priorité sur le planning. Appelez en décrivant ce que vous constatez : tache au plafond, écoulement dans les combles, tuile visiblement déplacée. Selon les chantiers en cours et la distance, le passage se fait en général sous quelques jours, plus vite quand l'eau entre franchement. La première étape est la mise hors d'eau, provisoire si nécessaire, pour stopper les dégâts. Après un épisode de vent, les délais s'allongent mécaniquement sur tout le secteur.",
+  },
+  {
+    q: "Que couvre exactement la garantie décennale ?",
+    a: "La garantie décennale couvre pendant dix ans, à compter de la réception des travaux, les dommages qui compromettent la solidité de l'ouvrage ou le rendent impropre à son usage. Sur une toiture, cela vise typiquement une infiltration liée à la pose, un défaut d'étanchéité sur un solin ou une noue, un affaissement. Elle ne couvre ni l'usure normale, ni les dégâts d'un événement climatique exceptionnel, ni le défaut d'entretien. L'attestation est jointe au devis, avant signature.",
+  },
+  {
+    q: "Mon assurance prend-elle en charge les dégâts après la grêle ou le vent ?",
+    a: "En général oui, si votre contrat multirisque habitation comporte la garantie tempête, grêle et poids de la neige, ce qui est le cas de la quasi-totalité des contrats. Déclarez le sinistre rapidement, cinq jours ouvrés dans la plupart des contrats. Prenez des photos avant toute intervention et conservez-les. Un devis détaillé décrivant les désordres facilite l'expertise. La mise hors d'eau d'urgence est le plus souvent prise en charge, ne laissez pas l'eau entrer en attendant l'expert.",
+  },
+];
+
+const title = "Couvreur zingueur à Montauban (82) | Gabarre Couverture";
+const description =
+  "Couvreur zingueur charpentier à Montauban : réfection de toiture, zinguerie, charpente, démoussage et réparation de fuite. Devis gratuit, garantie décennale.";
+---
+
+<BaseLayout title={title} description={description} canonical="/">
+  <script
+    slot="head"
+    type="application/ld+json"
+    is:inline
+    set:html={JSON.stringify(localBusinessLd())}
+  />
+
+  {/* 1. Hero */}
+  <section class="border-b border-line bg-white">
+    <div class="container-site pt-12 pb-14 md:pt-16 md:pb-20">
+      <span class="eyebrow mb-4"
+        >Couverture, zinguerie, charpente en {BUSINESS.department}</span
+      >
+      <h1 class="h1-site">
+        <span class="lg:block">Couvreur zingueur à {BUSINESS.city},</span>{" "}
+        <span class="lg:block">toiture réparée et garantie.</span>
+      </h1>
+
+      <div class="mt-10 grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-start lg:gap-14">
+        <div>
+          <p class="max-w-xl text-[18px] leading-[1.65] text-ink-600 md:text-[19px]">
+            Réfection de toiture, gouttières et chéneaux, reprise de charpente,
+            démoussage et hydrofuge. Une seule entreprise pour l'ensemble du
+            toit, du diagnostic à l'évacuation des gravats.
+          </p>
+
+          <div class="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
+            <CallButton size="lg" />
+            <a
+              href={BUSINESS.phoneHref}
+              aria-label={CTA_ARIA}
+              data-call-link
+              class="hidden text-[30px] font-extrabold tracking-[-0.02em] text-ink-950 transition-colors duration-150 hover:text-tuile-600 sm:block"
+            >
+              {BUSINESS.phoneDisplay}
+            </a>
+          </div>
+          <p class="mt-3 text-[14px] text-ink-400">{CTA_REASSURANCE}</p>
+
+          <ul
+            class="mt-8 flex flex-wrap gap-x-6 gap-y-3 border-t border-line pt-6 text-[14px] font-medium text-ink-600"
+          >
+            <li class="inline-flex items-center gap-2">
+              <span class="text-tuile-600"><Icon name="check" size={17} /></span>
+              Devis gratuit
+            </li>
+            <li class="inline-flex items-center gap-2">
+              <span class="text-tuile-600"><Icon name="map-pin" size={17} /></span>
+              Intervention en {BUSINESS.department}
+            </li>
+            <li class="inline-flex items-center gap-2">
+              <span class="text-tuile-600"><Icon name="shield" size={17} /></span>
+              Garantie décennale
+            </li>
+          </ul>
+        </div>
+
+        <Image
+          src={heroImage}
+          alt="Toiture en tuile canal en cours de réfection sur une maison de Montauban"
+          widths={[640, 880, 1200]}
+          sizes="(min-width: 1024px) 560px, 100vw"
+          loading="eager"
+          fetchpriority="high"
+          class="aspect-[4/3] w-full rounded-[10px] border border-line object-cover"
+        />
+      </div>
+    </div>
+  </section>
+
+  {/* 2. Bandeau garantie décennale */}
+  <DecennaleBanner />
+
+  {/* 3. Les 4 métiers */}
+  <section aria-labelledby="metiers-title" class="bg-white py-16 md:py-24">
+    <div class="container-site">
+      <SectionHeading
+        eyebrow="Les métiers"
+        title="Quatre savoir-faire, une seule entreprise sur le toit"
+        id="metiers-title"
+        intro="Couverture, zinguerie, charpente et entretien se traitent ensemble. Une fuite au niveau d'une noue est autant un sujet de zinguerie que de couverture."
+      />
+
+      <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+        {
+          metierCards.map((metier) => (
+            <Card href={metier.href} class="flex h-full flex-col">
+              <span
+                class="mb-5 flex h-11 w-11 items-center justify-center rounded-[8px] bg-tuile-50 text-tuile-600"
+                aria-hidden="true"
+              >
+                <Icon name={metier.icon} size={22} />
+              </span>
+              <h3 class="h3-site">{metier.cardTitle}</h3>
+              <p class="mt-2 flex-1 text-[15px] leading-[1.6] text-ink-600">
+                {metier.cardText}
+              </p>
+              <span class="mt-5 inline-flex items-center gap-1.5 text-[15px] font-semibold text-tuile-600">
+                Voir la prestation
+                <Icon name="arrow-right" size={16} />
+              </span>
+            </Card>
+          ))
+        }
+      </div>
+
+      <div class="mt-6">
+        <a
+          href="/services/reparation-fuite-toiture"
+          class="inline-flex items-center gap-2 text-[15px] font-medium text-ink-600 underline decoration-line underline-offset-4 transition-colors duration-150 hover:text-tuile-600"
+        >
+          <Icon name="leak" size={18} />
+          Une fuite en cours ? Voir la prestation réparation de fuite
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* 4. Pourquoi Gabarre */}
+  <section aria-labelledby="pourquoi-title" class="bg-cream py-16 md:py-24">
+    <div class="container-site">
+      <SectionHeading
+        eyebrow="La méthode"
+        title="Pourquoi passer par Gabarre"
+        id="pourquoi-title"
+      />
+
+      <div class="mt-10 grid gap-x-8 gap-y-9 md:grid-cols-2">
+        {
+          arguments4.map((item) => (
+            <div class="flex gap-4">
+              <span
+                class="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-[8px] border border-line bg-white text-tuile-600"
+                aria-hidden="true"
+              >
+                <Icon name={item.icon} size={20} />
+              </span>
+              <div>
+                <h3 class="h3-site">{item.title}</h3>
+                <p class="mt-2 text-[15px] leading-[1.65] text-ink-600">
+                  {item.text}
+                </p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* 5. Signes d'alerte */}
+  <section aria-labelledby="alertes-title" class="bg-white py-16 md:py-24">
+    <div class="container-site">
+      <SectionHeading
+        eyebrow="Diagnostic"
+        title="Six signes qui doivent vous faire monter au grenier"
+        id="alertes-title"
+        intro="Sur une toiture, le coût d'une réparation dépend surtout du temps qu'on a laissé passer. Voici ce qui doit déclencher un appel."
+      />
+
+      <ul class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {
+          alertes.map((alerte) => (
+            <li class="flex h-full flex-col rounded-[10px] border border-line bg-white p-6 shadow-[0_1px_2px_rgba(0,0,0,.04)]">
+              <span
+                class="mb-4 flex h-10 w-10 items-center justify-center rounded-[8px] bg-tuile-50 text-tuile-600"
+                aria-hidden="true"
+              >
+                <Icon name={alerte.icon} size={20} />
+              </span>
+              <h3 class="h3-site">{alerte.signe}</h3>
+              <p class="mt-2 flex-1 text-[15px] leading-[1.6] text-ink-600">
+                {alerte.consequence}
+              </p>
+              <a
+                href={BUSINESS.phoneHref}
+                aria-label={CTA_ARIA}
+                data-call-link
+                class="mt-5 inline-flex items-center gap-1.5 border-t border-line pt-4 text-[14px] font-semibold text-tuile-600 transition-colors duration-150 hover:text-tuile-700"
+              >
+                <Icon name="phone" size={15} />
+                {CTA_LABEL}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  {/* 6. Déroulé d'un chantier */}
+  <section aria-labelledby="deroule-title" class="bg-cream py-16 md:py-24">
+    <div class="container-site">
+      <SectionHeading
+        eyebrow="Le déroulé"
+        title="De votre appel à la fin du chantier"
+        id="deroule-title"
+      />
+
+      <ol class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+        {
+          etapes.map((etape) => (
+            <li class="rounded-[10px] border border-line bg-white p-6">
+              <span class="block text-[28px] font-extrabold tracking-[-0.02em] text-tuile-600">
+                {etape.num}
+              </span>
+              <h3 class="h3-site mt-3">{etape.title}</h3>
+              <p class="mt-2 text-[15px] leading-[1.6] text-ink-600">
+                {etape.text}
+              </p>
+            </li>
+          ))
+        }
+      </ol>
+
+      <div class="mt-10">
+        <CallButton size="lg" />
+        <p class="mt-3 text-[14px] text-ink-400">{CTA_REASSURANCE}</p>
+      </div>
+    </div>
+  </section>
+
+  {/* 7. Réalisations */}
+  <section aria-labelledby="realisations-title" class="bg-white py-16 md:py-24">
+    <div class="container-site">
+      <SectionHeading
+        eyebrow="Réalisations"
+        title="Trois chantiers, avant et après"
+        id="realisations-title"
+        intro="Type de prestation, commune et matériau posé pour chaque chantier."
+      />
+
+      <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {REALISATIONS.map((item) => <BeforeAfter item={item} />)}
+      </div>
+
+      <a
+        href="/realisations"
+        class="mt-8 inline-flex items-center gap-2 text-[15px] font-semibold text-tuile-600 transition-colors duration-150 hover:text-tuile-700"
+      >
+        Voir toutes les réalisations
+        <Icon name="arrow-right" size={17} />
+      </a>
+    </div>
+  </section>
+
+  {/* 8. Zone d'intervention */}
+  <section aria-labelledby="zone-title" class="bg-cream py-16 md:py-24">
+    <div class="container-site">
+      <div class="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:gap-14">
+        <div>
+          <SectionHeading
+            eyebrow="Zone d'intervention"
+            title="Montauban et le Tarn-et-Garonne"
+            id="zone-title"
+            intro="L'activité est centrée sur Montauban et la couronne immédiate, avec des déplacements réguliers vers Caussade, Nègrepelisse, Castelsarrasin, Moissac et Grisolles."
+          />
+          <p class="mt-4 text-[15px] leading-[1.65] text-ink-600">
+            Le déplacement pour établir un devis est gratuit sur l'ensemble de
+            cette zone. Si votre commune n'apparaît pas dans la liste, appelez
+            quand même : selon la nature du chantier, un déplacement reste
+            possible.
+          </p>
+          <div class="mt-8">
+            <CallButton size="lg" />
+            <p class="mt-3 text-[14px] text-ink-400">{CTA_REASSURANCE}</p>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="h3-site">Les communes couvertes</h3>
+          <ul class="mt-4 flex flex-wrap gap-2">
+            {
+              COMMUNES.map((commune) => (
+                <li>
+                  <a
+                    href={`/zone-intervention#${commune.slug}`}
+                    class="inline-flex min-h-[36px] items-center rounded-[8px] border border-line bg-white px-3 text-[14px] font-medium text-ink-600 transition-colors duration-150 hover:border-tuile-600 hover:text-tuile-600"
+                  >
+                    {commune.name}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+          <a
+            href="/zone-intervention"
+            class="mt-6 inline-flex items-center gap-2 text-[15px] font-semibold text-tuile-600 transition-colors duration-150 hover:text-tuile-700"
+          >
+            Détail de la zone d'intervention
+            <Icon name="arrow-right" size={17} />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* 9. FAQ */}
+  <section aria-labelledby="faq-title" class="bg-white py-16 md:py-24">
+    <div class="container-site">
+      <SectionHeading
+        eyebrow="Questions fréquentes"
+        title="Ce qu'on me demande le plus souvent"
+        id="faq-title"
+        intro="Prix, délais, démarches administratives et garanties. Les montants cités sont des ordres de grandeur, seul le devis engage un chiffre."
+      />
+      <div class="mt-10 max-w-3xl">
+        <Faq items={faqItems} />
+      </div>
+    </div>
+  </section>
+
+  {/* 10. CTA final */}
+  <CallCta />
+</BaseLayout>

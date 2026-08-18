@@ -1,0 +1,211 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import CallButton from "../components/CallButton.astro";
+import CallCta from "../components/CallCta.astro";
+import Icon from "../components/Icon.astro";
+import Faq from "../components/Faq.astro";
+import type { FaqItem } from "../components/Faq.astro";
+import image from "../assets/zone-intervention.webp";
+import {
+  BUSINESS,
+  COMMUNES,
+  CTA_REASSURANCE,
+  SECTEURS,
+  SERVICES,
+} from "../site.config";
+
+const byslug = new Map(COMMUNES.map((commune) => [commune.slug, commune]));
+
+const breadcrumb = [{ label: "Zone d'intervention" }];
+
+const faq: FaqItem[] = [
+  {
+    q: "Le déplacement pour établir un devis est-il facturé ?",
+    a: "Non, la visite et le devis sont gratuits sur l'ensemble des communes listées sur cette page. Le déplacement n'est facturé que dans un cas précis, celui d'une recherche de fuite avec intervention immédiate, puisqu'il ne s'agit alors plus d'un chiffrage mais d'un travail de diagnostic et de mise hors d'eau. Ce point est annoncé au téléphone avant le passage, jamais découvert sur la facture.",
+  },
+  {
+    q: "Ma commune n'est pas dans la liste, intervenez-vous quand même ?",
+    a: "Souvent oui. La liste correspond aux communes où les déplacements sont réguliers, pas à une frontière stricte. Pour un chantier de couverture ou de charpente qui occupe plusieurs jours, un déplacement plus lointain reste envisageable. Pour une intervention courte, comme un curage de gouttière, la distance devient déterminante. Le plus simple est d'appeler et de poser la question directement.",
+  },
+  {
+    q: "Intervenez-vous en urgence après une tempête ?",
+    a: "Les mises hors d'eau passent en priorité sur le planning, en commençant par les situations où l'eau entre activement dans le logement. Après un épisode de vent ou de grêle marqué sur le Tarn-et-Garonne, les appels arrivent tous en même temps et les délais s'allongent forcément. La priorité va alors aux communes proches de Montauban, simplement parce que cela permet de traiter plus de situations dans la journée.",
+  },
+];
+
+const title = "Zone d'intervention, couvreur à Montauban | Gabarre";
+const description =
+  "Couvreur zingueur sur Montauban, Nègrepelisse, Caussade, Castelsarrasin, Moissac, Grisolles et 28 communes du 82. Devis gratuit, déplacement offert.";
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical="/zone-intervention"
+  breadcrumb={breadcrumb}
+>
+  <PageHero
+    eyebrow="Zone d'intervention"
+    title="Couvreur à Montauban et dans le Tarn-et-Garonne"
+    lead="L'activité est centrée sur Montauban et sa couronne immédiate, avec des déplacements réguliers vers la vallée de l'Aveyron, le secteur de Caussade, la vallée de la Garonne et l'axe sud vers Toulouse."
+    breadcrumb={breadcrumb}
+  />
+
+  <section class="bg-white py-16 md:py-24">
+    <div class="container-site">
+      <div class="grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-14">
+        <div>
+          <SectionHeading
+            eyebrow="Le principe"
+            title="Une zone qui tient en trente minutes de route"
+            id="principe"
+          />
+          <div class="prose-site mt-6">
+            <p>
+              Travailler sur un rayon limité n'est pas une contrainte
+              commerciale, c'est une condition technique. Un couvreur qui passe
+              deux heures par jour dans son véhicule ne peut ni intervenir vite
+              sur une fuite, ni repasser le lendemain pour vérifier un point
+              douteux, ni revenir sans facturer un déplacement.
+            </p>
+            <p>
+              Concrètement, cela veut dire que la visite de diagnostic est
+              gratuite partout dans la liste ci-dessous, qu'une mise hors d'eau
+              peut se déclencher rapidement, et que le suivi après chantier ne
+              pose aucun problème logistique.
+            </p>
+            <p>
+              Les <a href="/services/couverture">chantiers de couverture</a> et de
+              <a href="/services/charpente">charpente</a> justifient parfois d'aller
+              plus loin, puisqu'ils occupent plusieurs jours au même endroit. Pour
+              un <a href="/services/nettoyage-toiture">démoussage</a> ou un curage
+              de gouttière, la distance pèse davantage.
+            </p>
+          </div>
+
+          <div class="mt-8">
+            <CallButton size="lg" />
+            <p class="mt-3 text-[14px] text-ink-400">{CTA_REASSURANCE}</p>
+          </div>
+        </div>
+
+        <div>
+          <Image
+            src={image}
+            alt="Repère visuel de la zone d'intervention autour de Montauban en Tarn-et-Garonne"
+            widths={[600, 900]}
+            sizes="(min-width: 1024px) 520px, 100vw"
+            loading="lazy"
+            class="aspect-[4/3] w-full rounded-[10px] border border-line object-cover"
+          />
+          <div class="mt-6 grid gap-3 sm:grid-cols-2">
+            <div class="rounded-[10px] border border-line bg-cream p-5">
+              <span class="text-tuile-600"><Icon name="map-pin" size={20} /></span>
+              <p class="mt-3 text-[15px] font-semibold text-ink-950">
+                {COMMUNES.length} communes couvertes
+              </p>
+              <p class="mt-1 text-[14px] leading-[1.6] text-ink-600">
+                En {BUSINESS.department} et sur la frange nord de la
+                Haute-Garonne.
+              </p>
+            </div>
+            <div class="rounded-[10px] border border-line bg-cream p-5">
+              <span class="text-tuile-600"><Icon name="file-text" size={20} /></span>
+              <p class="mt-3 text-[15px] font-semibold text-ink-950">
+                Visite et devis gratuits
+              </p>
+              <p class="mt-1 text-[14px] leading-[1.6] text-ink-600">
+                Sur l'ensemble de la zone, sans engagement de votre part.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-cream py-16 md:py-24">
+    <div class="container-site">
+      <SectionHeading
+        eyebrow="Les communes"
+        title="Où j'interviens, secteur par secteur"
+        id="communes"
+        intro="Chaque secteur a ses particularités de bâti, de couverture et d'exposition. Cela change la façon d'aborder un diagnostic."
+      />
+
+      <div class="mt-10 space-y-8">
+        {
+          SECTEURS.map((secteur) => (
+            <div class="rounded-[10px] border border-line bg-white p-6 md:p-8">
+              <h3 class="h3-site">{secteur.name}</h3>
+              <p class="mt-2 max-w-3xl text-[15px] leading-[1.65] text-ink-600">
+                {secteur.text}
+              </p>
+              <ul class="mt-5 flex flex-wrap gap-2">
+                {secteur.slugs.map((slug) => (
+                  <li id={slug} class="scroll-mt-28">
+                    <span class="inline-flex min-h-[36px] items-center rounded-[8px] border border-line bg-cream px-3 text-[14px] font-medium text-ink-800">
+                      {byslug.get(slug)?.name}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-16 md:py-24">
+    <div class="container-site">
+      <SectionHeading
+        eyebrow="Prestations"
+        title="Ce que je réalise sur toute la zone"
+        id="prestations"
+      />
+      <ul class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {
+          SERVICES.map((service) => (
+            <li>
+              <a
+                href={service.href}
+                class="flex h-full flex-col rounded-[10px] border border-line bg-white p-6 shadow-[0_1px_2px_rgba(0,0,0,.04)] transition-colors duration-150 hover:border-tuile-600"
+              >
+                <h3 class="h3-site">{service.cardTitle}</h3>
+                <p class="mt-2 flex-1 text-[15px] leading-[1.6] text-ink-600">
+                  {service.cardText}
+                </p>
+                <span class="mt-5 inline-flex items-center gap-1.5 text-[15px] font-semibold text-tuile-600">
+                  Voir la prestation
+                  <Icon name="arrow-right" size={16} />
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="bg-cream py-16 md:py-24">
+    <div class="container-site">
+      <SectionHeading
+        eyebrow="Questions fréquentes"
+        title="Déplacement, urgence et communes"
+        id="faq"
+      />
+      <div class="mt-10 max-w-3xl">
+        <Faq items={faq} />
+      </div>
+    </div>
+  </section>
+
+  <CallCta
+    title="Vérifions ensemble si votre commune est couverte"
+    text="Un appel suffit pour savoir si un déplacement est possible et sous quel délai, selon la nature du chantier."
+  />
+</BaseLayout>

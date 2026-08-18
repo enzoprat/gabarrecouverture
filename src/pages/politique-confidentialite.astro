@@ -1,0 +1,100 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import { BUSINESS } from "../site.config";
+
+const breadcrumb = [{ label: "Politique de confidentialité" }];
+
+const title = "Politique de confidentialité | Gabarre Couverture";
+const description =
+  "Politique de confidentialité du site Gabarre Couverture : aucun formulaire, aucun cookie de mesure d'audience, aucune donnée personnelle collectée en ligne.";
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical="/politique-confidentialite"
+  noindex
+  breadcrumb={breadcrumb}
+>
+  <PageHero
+    title="Politique de confidentialité"
+    lead="Ce site est un site statique sans formulaire. Il ne collecte aucune donnée personnelle et ne dépose aucun cookie de mesure d'audience."
+    breadcrumb={breadcrumb}
+    showCta={false}
+  />
+
+  <section class="bg-white py-16 md:py-24">
+    <div class="container-site">
+      <div class="prose-site max-w-3xl">
+        <h2>Ce que ce site ne fait pas</h2>
+        <p>
+          Le site ne comporte aucun formulaire de contact, aucun champ de
+          saisie, aucune inscription et aucun espace client. Aucune donnée n'est
+          donc transmise depuis vos pages vers un serveur de l'entreprise.
+        </p>
+        <ul>
+          <li>Aucun cookie publicitaire ni de reciblage.</li>
+          <li>Aucun outil de mesure d'audience de type analytique.</li>
+          <li>Aucun pixel de réseau social ni bouton de partage traçant.</li>
+          <li>
+            Aucune ressource chargée depuis un domaine tiers. La police de
+            caractères du site est hébergée avec lui, ce qui évite toute
+            connexion vers un service externe à votre insu.
+          </li>
+          <li>Aucune revente ni transmission de données à des tiers.</li>
+        </ul>
+
+        <h2>Hébergement et journaux techniques</h2>
+        <p>
+          Le site est hébergé par Vercel Inc. Comme tout hébergeur, Vercel
+          enregistre des journaux de connexion techniques, incluant l'adresse IP
+          et le type de navigateur, dans le seul but d'assurer la sécurité et la
+          disponibilité du service. Ce traitement relève de l'intérêt légitime
+          de l'hébergeur et n'est ni exploité ni consulté par {
+            BUSINESS.legalName
+          }.
+        </p>
+
+        <h2>Données transmises lors d'un appel</h2>
+        <p>
+          Lorsque vous appelez le {BUSINESS.phoneDisplay}, votre numéro
+          s'affiche sur le téléphone de l'entreprise. Ce numéro, ainsi que les
+          informations que vous communiquez oralement, comme votre adresse et la
+          nature des travaux, sont utilisés uniquement pour organiser la visite,
+          établir le devis et réaliser le chantier.
+        </p>
+        <p>
+          Ces informations sont conservées le temps nécessaire au suivi du
+          dossier, puis pendant la durée légale imposée par les obligations
+          comptables et par la garantie décennale. Elles ne sont jamais cédées à
+          des fins commerciales.
+        </p>
+
+        <h2>Vos droits</h2>
+        <p>
+          Vous disposez d'un droit d'accès, de rectification, d'effacement,
+          d'opposition et de limitation sur les données vous concernant. La
+          demande s'effectue auprès de {BUSINESS.legalName}, par courrier à {
+            BUSINESS.street
+          }, {BUSINESS.postalCode} {BUSINESS.city}, ou à l'adresse électronique {
+            BUSINESS.email
+          }. Une réponse vous est apportée dans un délai d'un mois.
+        </p>
+        <p>
+          En cas de désaccord persistant, vous pouvez saisir la Commission
+          nationale de l'informatique et des libertés, 3 place de Fontenoy, TSA
+          80715, 75334 Paris Cedex 07.
+        </p>
+
+        <h2>Modification de cette page</h2>
+        <p>
+          Cette politique peut être mise à jour si le site évolue, par exemple
+          si un outil de mesure d'audience venait à être ajouté. La version en
+          ligne est toujours celle qui fait foi. Les informations sur l'éditeur
+          figurent dans les <a href="/mentions-legales">mentions légales</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

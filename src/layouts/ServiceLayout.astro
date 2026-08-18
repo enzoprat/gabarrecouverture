@@ -1,0 +1,301 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import BaseLayout from "./BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import CallButton from "../components/CallButton.astro";
+import CallCta from "../components/CallCta.astro";
+import RelatedServices from "../components/RelatedServices.astro";
+import Faq from "../components/Faq.astro";
+import type { FaqItem } from "../components/Faq.astro";
+import Icon from "../components/Icon.astro";
+import { serviceLd } from "../lib/schema";
+import { CTA_REASSURANCE, SERVICES } from "../site.config";
+
+export interface Prestation {
+  label: string;
+  text: string;
+}
+
+export interface Etape {
+  num: string;
+  title: string;
+  text: string;
+}
+
+export interface Materiau {
+  name: string;
+  text: string;
+}
+
+export interface Tarif {
+  label: string;
+  range: string;
+  unit: string;
+}
+
+interface Props {
+  slug: string;
+  metaTitle: string;
+  metaDescription: string;
+  eyebrow: string;
+  h1: string;
+  lead: string;
+  serviceName: string;
+  serviceType: string;
+  image: ImageMetadata;
+  imageAlt: string;
+  includesTitle: string;
+  includesIntro: string;
+  includes: Prestation[];
+  stepsTitle: string;
+  steps: Etape[];
+  materialsTitle: string;
+  materialsIntro: string;
+  materials: Materiau[];
+  pricingIntro: string;
+  tarifs: Tarif[];
+  facteurs: string[];
+  faq: FaqItem[];
+}
+
+const {
+  slug,
+  metaTitle,
+  metaDescription,
+  eyebrow,
+  h1,
+  lead,
+  serviceName,
+  serviceType,
+  image,
+  imageAlt,
+  includesTitle,
+  includesIntro,
+  includes,
+  stepsTitle,
+  steps,
+  materialsTitle,
+  materialsIntro,
+  materials,
+  pricingIntro,
+  tarifs,
+  facteurs,
+  faq,
+} = Astro.props;
+
+const service = SERVICES.find((item) => item.slug === slug)!;
+const breadcrumb = [
+  { label: "Prestations", href: "/services/couverture" },
+  { label: service.navLabel },
+];
+---
+
+<BaseLayout
+  title={metaTitle}
+  description={metaDescription}
+  canonical={service.href}
+  breadcrumb={breadcrumb}
+>
+  <script
+    slot="head"
+    type="application/ld+json"
+    is:inline
+    set:html={JSON.stringify(
+      serviceLd({
+        name: serviceName,
+        description: metaDescription,
+        path: service.href,
+        serviceType,
+      }),
+    )}
+  />
+
+  <PageHero
+    eyebrow={eyebrow}
+    title={h1}
+    lead={lead}
+    breadcrumb={breadcrumb}
+  />
+
+  <section class="bg-white py-16 md:py-24">
+    <div class="container-site">
+      <div class="grid gap-10 lg:grid-cols-[1.15fr_1fr] lg:gap-14">
+        <div>
+          <SectionHeading
+            eyebrow="La prestation"
+            title={includesTitle}
+            id="prestation"
+            intro={includesIntro}
+          />
+
+          <ul class="mt-8 border-t border-line">
+            {
+              includes.map((item) => (
+                <li class="flex gap-3.5 border-b border-line py-4">
+                  <span
+                    class="mt-1 shrink-0 text-tuile-600"
+                    aria-hidden="true"
+                  >
+                    <Icon name="check" size={18} />
+                  </span>
+                  <div>
+                    <p class="text-[16px] font-semibold text-ink-950">
+                      {item.label}
+                    </p>
+                    <p class="mt-1 text-[15px] leading-[1.6] text-ink-600">
+                      {item.text}
+                    </p>
+                  </div>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <div class="lg:pt-4">
+          <Image
+            src={image}
+            alt={imageAlt}
+            widths={[640, 900]}
+            sizes="(min-width: 1024px) 520px, 100vw"
+            loading="lazy"
+            class="aspect-[3/2] w-full rounded-[10px] border border-line object-cover"
+          />
+          <div
+            class="mt-6 rounded-[10px] border border-line bg-cream p-6"
+          >
+            <p class="text-[16px] font-semibold text-ink-950">
+              Un doute sur l'état de votre toiture ?
+            </p>
+            <p class="mt-2 text-[15px] leading-[1.6] text-ink-600">
+              Décrivez ce que vous constatez au téléphone. En quelques
+              questions, on sait si un passage sur place est nécessaire.
+            </p>
+            <div class="mt-5">
+              <CallButton full />
+            </div>
+            <p class="mt-3 text-[13px] text-ink-400">{CTA_REASSURANCE}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-cream py-16 md:py-24">
+    <div class="container-site">
+      <SectionHeading eyebrow="Méthode" title={stepsTitle} id="methode" />
+      <ol class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {
+          steps.map((step) => (
+            <li class="rounded-[10px] border border-line bg-white p-6">
+              <span class="block text-[26px] font-extrabold tracking-[-0.02em] text-tuile-600">
+                {step.num}
+              </span>
+              <h3 class="h3-site mt-3">{step.title}</h3>
+              <p class="mt-2 text-[15px] leading-[1.6] text-ink-600">
+                {step.text}
+              </p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="bg-white py-16 md:py-24">
+    <div class="container-site">
+      <SectionHeading
+        eyebrow="Matériaux"
+        title={materialsTitle}
+        id="materiaux"
+        intro={materialsIntro}
+      />
+      <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {
+          materials.map((material) => (
+            <div class="rounded-[10px] border border-line bg-white p-6 shadow-[0_1px_2px_rgba(0,0,0,.04)]">
+              <h3 class="h3-site">{material.name}</h3>
+              <p class="mt-2 text-[15px] leading-[1.6] text-ink-600">
+                {material.text}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-cream py-16 md:py-24">
+    <div class="container-site">
+      <div class="grid gap-10 lg:grid-cols-[1fr_1fr] lg:gap-14">
+        <div>
+          <SectionHeading
+            eyebrow="Budget"
+            title="Fourchette de prix indicative"
+            id="prix"
+            intro={pricingIntro}
+          />
+
+          <dl class="mt-8 border-t border-line">
+            {
+              tarifs.map((tarif) => (
+                <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b border-line py-4">
+                  <dt class="text-[15px] font-medium text-ink-800">
+                    {tarif.label}
+                  </dt>
+                  <dd class="text-[15px] font-semibold text-ink-950">
+                    {tarif.range}
+                    <span class="font-normal text-ink-400"> {tarif.unit}</span>
+                  </dd>
+                </div>
+              ))
+            }
+          </dl>
+          <p class="mt-4 text-[14px] leading-[1.6] text-ink-400">
+            Ces montants sont des ordres de grandeur constatés, donnés à titre
+            indicatif. Seul un devis établi après visite engage un prix.
+          </p>
+        </div>
+
+        <div class="lg:pt-4">
+          <h3 class="h3-site">Ce qui fait varier le prix</h3>
+          <ul class="mt-4 space-y-3">
+            {
+              facteurs.map((facteur) => (
+                <li class="flex gap-3 text-[15px] leading-[1.6] text-ink-600">
+                  <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-tuile-600" />
+                  <span>{facteur}</span>
+                </li>
+              ))
+            }
+          </ul>
+          <div class="mt-8">
+            <CallButton size="lg" />
+            <p class="mt-3 text-[14px] text-ink-400">{CTA_REASSURANCE}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <slot />
+
+  <section class="bg-white py-16 md:py-24">
+    <div class="container-site">
+      <SectionHeading
+        eyebrow="Questions fréquentes"
+        title={`Trois questions sur ${serviceName.toLowerCase()}`}
+        id="faq"
+      />
+      <div class="mt-10 max-w-3xl">
+        <Faq items={faq} />
+      </div>
+    </div>
+  </section>
+
+  <RelatedServices current={slug} />
+
+  <CallCta />
+</BaseLayout>
