@@ -45,7 +45,8 @@ jobs:
         run: node .github/scripts/prefix-base.mjs dist "$BASE"
 
       - name: Interdire l'indexation de l'aperçu
-        run: printf 'User-agent: *\nDisallow: /\n' > dist/robots.txt
+        run: |
+          printf 'User-agent: *\nDisallow: /\n' > dist/robots.txt
 
       - uses: actions/configure-pages@v5
         with:
