@@ -61,8 +61,6 @@ export function localBusinessLd() {
     ...(isFilled(BUSINESS.foundingYear)
       ? { foundingDate: BUSINESS.foundingYear }
       : {}),
-    priceRange: BUSINESS.priceRange,
-    currenciesAccepted: "EUR",
     areaServed: COMMUNES.map((commune) => ({
       "@type": "City",
       name: commune.name,

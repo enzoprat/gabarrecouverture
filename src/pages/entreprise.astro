@@ -62,8 +62,8 @@ const garanties = [
 
 const faq: FaqItem[] = [
   {
-    q: "Comment se passe le paiement d'un chantier ?",
-    a: "Le principe habituel est un acompte à la commande, qui sert à approvisionner les matériaux, puis le solde à la fin des travaux, après réception. Sur un chantier long, un ou deux appels de situation intermédiaires peuvent être prévus, en fonction de l'avancement réel. Les modalités exactes figurent sur le devis, avec les montants et les échéances. Rien ne se décide en cours de chantier.",
+    q: "Comment s'organise un chantier une fois le devis signé ?",
+    a: "Les matériaux sont commandés dès l'accord, ce qui fixe la date de démarrage réelle : une tuile de réemploi ou une teinte particulière demande parfois quelques semaines d'approvisionnement. Ensuite, l'installation de la sécurité et la dépose se font le même jour, pour ne jamais laisser une toiture ouverte plus que nécessaire. Vous êtes prévenu de chaque étape la veille.",
   },
   {
     q: "Que se passe-t-il si la météo bloque le chantier ?",
@@ -71,7 +71,7 @@ const faq: FaqItem[] = [
   },
   {
     q: "Faites-vous aussi des petites interventions ?",
-    a: "Oui. Remplacer trois tuiles cassées, reprendre un solin, curer des gouttières ou reposer une faîtière descellée font partie du travail courant. Ces interventions coûtent peu et évitent des réparations bien plus lourdes deux hivers plus tard. Le seul point qui compte est la distance : sur une intervention courte, un déplacement lointain n'a pas de sens économique, ni pour vous ni pour moi.",
+    a: "Oui. Remplacer trois tuiles cassées, reprendre un solin, curer des gouttières ou reposer une faîtière descellée font partie du travail courant. Elles prennent peu de temps et évitent des réparations bien plus lourdes deux hivers plus tard. Le seul point qui compte est la distance : sur une intervention courte, un déplacement lointain n'a pas de sens, ni pour vous ni pour moi.",
   },
 ];
 
@@ -129,7 +129,7 @@ const description =
               minutes, soit {COMMUNES.length} communes détaillées sur la page <a
                 href="/zone-intervention">zone d'intervention</a
               >. Ce périmètre permet d'intervenir vite sur une fuite et de
-              repasser sans facturer un déplacement.
+              repasser rapidement après les travaux.
             </p>
           </div>
 
@@ -266,7 +266,7 @@ const description =
     <div class="container-site">
       <SectionHeading
         eyebrow="Questions fréquentes"
-        title="Paiement, météo et petites interventions"
+        title="Organisation, météo et petites interventions"
         id="faq"
       />
       <div class="mt-10 max-w-3xl">

@@ -44,7 +44,7 @@ const arguments4: { icon: IconName; title: string; text: string }[] = [
   {
     icon: "file-text",
     title: "Un devis détaillé et ferme",
-    text: "Chaque poste est chiffré séparément, avec les quantités en mètres carrés et en mètres linéaires. Le montant ne bouge pas, sauf si vous demandez vous-même une modification, actée par écrit.",
+    text: "Chaque poste est décrit séparément, avec les quantités en mètres carrés et en mètres linéaires. Le devis ne bouge pas, sauf si vous demandez vous-même une modification, actée par écrit.",
   },
   {
     icon: "check",
@@ -87,7 +87,7 @@ const alertes: { icon: IconName; signe: string; consequence: string }[] = [
     icon: "roof",
     signe: "Des tuiles fendues ou effritées visibles depuis le sol",
     consequence:
-      "Chaque tuile fendue est un point d'entrée. Une seule tuile coûte peu à remplacer, un liteaunage pourri sur trois mètres coûte beaucoup plus.",
+      "Chaque tuile fendue est un point d'entrée. Une tuile se remplace en quelques minutes, un liteaunage pourri sur trois mètres impose de redéposer toute la zone.",
   },
   {
     icon: "beam",
@@ -122,8 +122,8 @@ const etapes = [
 
 const faqItems: FaqItem[] = [
   {
-    q: "Combien coûte une réfection de toiture au mètre carré ?",
-    a: "Une réfection complète, dépose de l'ancienne couverture comprise, se situe le plus souvent entre 80 et 150 euros par mètre carré en tuile terre cuite, pose et évacuation incluses. Le montant monte si la charpente doit être reprise, si un écran sous-toiture est ajouté ou si l'accès au chantier est difficile. Un simple remaniage, sans changement de tuiles, revient nettement moins cher. Ces ordres de grandeur sont indicatifs : seul un devis établi après montée sur toiture engage un chiffre.",
+    q: "Faut-il refaire toute la toiture ou une reprise suffit-elle ?",
+    a: "Tant que les tuiles restent saines et que le désordre vient du support ou d'un tassement, un remaniage suffit : on dépose, on reprend le liteaunage, on repose. Dès que la terre cuite est gélive ou feuilletée, qu'une part importante des tuiles est à changer, ou que le même toit fuit à plusieurs endroits en deux hivers, la réfection complète s'impose. La décision se prend sur le toit, tuiles en main, pas depuis le sol.",
   },
   {
     q: "Combien de temps dure un chantier de couverture ?",
@@ -134,8 +134,8 @@ const faqItems: FaqItem[] = [
     a: "Dans la plupart des cas, oui. Dès que les travaux modifient l'aspect extérieur du bâtiment, changement de modèle de tuile, de teinte ou de matériau, une déclaration préalable de travaux est à déposer en mairie. Un remplacement strictement à l'identique n'y est en principe pas soumis, mais les règles varient selon le plan local d'urbanisme et le secteur, en particulier aux abords des monuments historiques de Montauban. Appelez le service urbanisme de votre commune avant de lancer le chantier.",
   },
   {
-    q: "Puis-je bénéficier de la TVA à 10 % et d'aides ?",
-    a: "Sur un logement achevé depuis plus de deux ans, les travaux de rénovation de toiture relèvent de la TVA à 10 %, appliquée directement sur le devis et la facture. Vous signez simplement une attestation. Le taux de 5,5 % concerne les travaux d'amélioration énergétique, par exemple une isolation posée en même temps que la couverture. Les aides publiques évoluent souvent : renseignez-vous auprès de France Rénov' avant de démarrer, une couverture seule n'y ouvre généralement pas droit.",
+    q: "Comment se passe la visite avant le devis ?",
+    a: "Vous appelez, vous décrivez ce que vous constatez, et on convient d'un passage. Sur place, je monte sur la toiture ou dans les combles selon le sujet, je contrôle le support et les points singuliers, et je prends les mesures. Vous recevez ensuite un devis écrit qui nomme précisément chaque poste, les matériaux retenus et la durée prévue. La visite et le devis ne vous engagent à rien.",
   },
   {
     q: "À quelle fréquence faut-il démousser une toiture ?",
@@ -318,7 +318,7 @@ const description =
         eyebrow="Diagnostic"
         title="Six signes qui doivent vous faire monter au grenier"
         id="alertes-title"
-        intro="Sur une toiture, le coût d'une réparation dépend surtout du temps qu'on a laissé passer. Voici ce qui doit déclencher un appel."
+        intro="Sur une toiture, l'ampleur des travaux dépend surtout du temps qu'on a laissé passer. Voici ce qui doit déclencher un appel."
       />
 
       <ul class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
@@ -465,7 +465,7 @@ const description =
         eyebrow="Questions fréquentes"
         title="Ce qu'on me demande le plus souvent"
         id="faq-title"
-        intro="Prix, délais, démarches administratives et garanties. Les montants cités sont des ordres de grandeur, seul le devis engage un chiffre."
+        intro="Déroulé d'une intervention, délais, démarches administratives et garanties. Si votre situation n'est pas décrite ici, posez la question au téléphone."
       />
       <div class="mt-10 max-w-3xl">
         <Faq items={faqItems} />

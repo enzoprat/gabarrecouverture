@@ -38,7 +38,6 @@ export const BUSINESS = {
   openingHoursLabel: "{{horaires}}",
   /** TODO {{assureur + n° de contrat}} */
   insurance: "{{assureur + n° de contrat}}",
-  priceRange: "€€",
 } as const;
 
 /** Libellé d'action unique sur tout le site. */

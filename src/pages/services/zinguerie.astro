@@ -93,37 +93,10 @@ const materials = [
   },
 ];
 
-const tarifs = [
-  {
-    label: "Gouttière zinc, fourniture et pose",
-    range: "45 à 90 €",
-    unit: "par mètre linéaire",
-  },
-  {
-    label: "Chéneau encaissé en zinc soudé",
-    range: "90 à 180 €",
-    unit: "par mètre linéaire",
-  },
-  {
-    label: "Descente d'eau pluviale complète",
-    range: "40 à 80 €",
-    unit: "par mètre linéaire",
-  },
-  {
-    label: "Reprise de solin de cheminée",
-    range: "250 à 700 €",
-    unit: "l'intervention",
-  },
-  {
-    label: "Nettoyage et curage de gouttières",
-    range: "3 à 8 €",
-    unit: "par mètre linéaire",
-  },
-];
 
 const facteurs = [
   "La hauteur de la maison, un chantier au-dessus d'un étage impose souvent un échafaudage ou une nacelle.",
-  "Le matériau retenu, l'écart entre PVC, aluminium laqué et zinc soudé est significatif.",
+  "Le matériau retenu, le zinc soudé demande un façonnage et une soudure que le PVC clipsé ne réclame pas.",
   "Le nombre d'angles, de naissances et de raccords, qui demandent chacun un façonnage sur mesure.",
   "L'accessibilité de la zone : un chéneau encaissé derrière un acrotère se travaille plus lentement.",
   "L'état du support de fixation, un bandeau de rive pourri doit être remplacé avant de reposer les crochets.",
@@ -132,7 +105,7 @@ const facteurs = [
 const faq: FaqItem[] = [
   {
     q: "Zinc, aluminium ou PVC, que choisir pour des gouttières ?",
-    a: "Le zinc reste la référence sur une maison ancienne : il se façonne sur mesure, se soude et dure longtemps. L'aluminium laqué est intéressant quand vous voulez une teinte précise et un entretien nul, notamment en habillage de rive. Le PVC coûte moins cher à l'achat mais se dilate beaucoup, ce qui ouvre les joints au fil des étés. Sur une maison exposée au soleil du Tarn-et-Garonne, il vieillit plus vite qu'ailleurs.",
+    a: "Le zinc reste la référence sur une maison ancienne : il se façonne sur mesure, se soude et dure longtemps. L'aluminium laqué est intéressant quand vous voulez une teinte précise et un entretien nul, notamment en habillage de rive. Le PVC se pose vite mais se dilate beaucoup, ce qui ouvre les joints au fil des étés. Sur une maison exposée au soleil du Tarn-et-Garonne, il vieillit plus vite qu'ailleurs.",
   },
   {
     q: "Ma gouttière déborde, faut-il forcément la remplacer ?",
@@ -164,8 +137,7 @@ const faq: FaqItem[] = [
   materialsTitle="Matériaux et options"
   materialsIntro="Le choix dépend du bâti, de l'exposition et de la durée que vous visez. Un point technique compte, le sens d'écoulement entre métaux différents, sous peine de corrosion accélérée."
   materials={materials}
-  pricingIntro="Les montants ci-dessous couvrent la dépose de l'existant, la fourniture et la pose, hors échafaudage."
-  tarifs={tarifs}
+  visiteIntro="Le relevé se fait sur place, mètre en main. Longueurs de gouttière, nombre de naissances, angles et état du bandeau de rive se comptent un par un, ils ne s'estiment pas au téléphone."
   facteurs={facteurs}
   faq={faq}
 >

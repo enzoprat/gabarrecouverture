@@ -130,30 +130,19 @@ encadré qui indique explicitement que le contenu attend validation. **Cet
 encadré doit être retiré une fois les chantiers renseignés** (section en haut de
 `src/pages/realisations.astro`).
 
-### 3.4 Fourchettes de prix
+### 3.4 Aucun prix affiché
 
-Chaque page prestation affiche des fourchettes indicatives, par exemple 80 à
-150 € le m² pour une réfection complète. Elles correspondent aux ordres de
-grandeur du marché de la couverture en Tarn-et-Garonne, mais elles **doivent
-être relues et ajustées par l'artisan** : ce sont ses prix qui s'affichent.
+Choix assumé : le site n'affiche **aucun prix, aucune fourchette, aucun ordre de
+grandeur**. Chaque page prestation remplace le bloc budget par une section
+« Pourquoi une visite est nécessaire » et une liste des facteurs qui changent
+d'un chantier à l'autre. Le chiffrage se fait uniquement au téléphone puis au
+devis, après visite.
 
-Fichiers concernés, tableau `tarifs` en haut de chaque page :
+Si l'artisan souhaite un jour publier des tarifs, il faudra recréer le bloc dans
+`src/layouts/ServiceLayout.astro` et remettre `priceRange` dans
+`src/site.config.ts` et `src/lib/schema.ts`.
 
-- `src/pages/services/couverture.astro`
-- `src/pages/services/zinguerie.astro`
-- `src/pages/services/charpente.astro`
-- `src/pages/services/nettoyage-toiture.astro`
-- `src/pages/services/reparation-fuite-toiture.astro`
-
-Les mêmes ordres de grandeur sont repris dans la FAQ de la page d'accueil
-(`src/pages/index.astro`). Les faire coïncider après relecture.
-
-### 3.5 FAQ d'accueil, aides et TVA
-
-La réponse sur la TVA à 10 % et les aides suit la réglementation applicable aux
-logements de plus de deux ans. À relire à chaque changement de loi de finances.
-
-### 3.6 Zone d'intervention
+### 3.5 Zone d'intervention
 
 `SECTEURS` dans `src/site.config.ts` décrit cinq secteurs et leurs
 particularités de bâti. Ces descriptions sont plausibles pour la région mais

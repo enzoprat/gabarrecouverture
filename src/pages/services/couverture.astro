@@ -93,29 +93,11 @@ const materials = [
   },
 ];
 
-const tarifs = [
-  {
-    label: "Réfection complète en tuile terre cuite",
-    range: "80 à 150 €",
-    unit: "par m²",
-  },
-  { label: "Remaniage, dépose, tri et repose", range: "35 à 70 €", unit: "par m²" },
-  {
-    label: "Remplacement de tuiles cassées",
-    range: "150 à 400 €",
-    unit: "l'intervention",
-  },
-  {
-    label: "Fourniture et pose d'écran sous-toiture",
-    range: "15 à 30 €",
-    unit: "par m²",
-  },
-];
 
 const facteurs = [
   "La pente et la hauteur de la toiture, qui déterminent le besoin d'échafaudage et la vitesse de travail.",
-  "L'état du support une fois découvert : un liteaunage à refaire intégralement change nettement le montant.",
-  "Le modèle de tuile retenu, l'écart entre une mécanique courante et une canal vieillie est important.",
+  "L'état du support une fois découvert : un liteaunage à refaire intégralement double le volume de travail.",
+  "Le modèle de tuile retenu, une canal vieillie ne se pose ni au même rythme ni avec les mêmes accessoires qu'une mécanique.",
   "Le nombre de points singuliers à traiter : cheminées, châssis de toit, lucarnes, noues.",
   "L'accès au chantier et la place disponible pour la benne et le monte-matériaux.",
 ];
@@ -127,7 +109,7 @@ const faq: FaqItem[] = [
   },
   {
     q: "Peut-on changer de modèle de tuile sur une toiture existante ?",
-    a: "Techniquement oui, à condition que la pente et la charpente le permettent. Une tuile mécanique est plus lourde qu'une canal ancienne, il faut vérifier la section des chevrons et l'entraxe. Administrativement, un changement de modèle ou de teinte modifie l'aspect extérieur et suppose une déclaration préalable en mairie. Sur certains secteurs de Montauban, le plan local d'urbanisme impose une teinte et un type précis. On vérifie ce point avant de chiffrer.",
+    a: "Techniquement oui, à condition que la pente et la charpente le permettent. Une tuile mécanique est plus lourde qu'une canal ancienne, il faut vérifier la section des chevrons et l'entraxe. Administrativement, un changement de modèle ou de teinte modifie l'aspect extérieur et suppose une déclaration préalable en mairie. Sur certains secteurs de Montauban, le plan local d'urbanisme impose une teinte et un type précis. On vérifie ce point avant d'engager quoi que ce soit.",
   },
   {
     q: "Combien de temps dure une couverture en tuile terre cuite ?",
@@ -155,8 +137,7 @@ const faq: FaqItem[] = [
   materialsTitle="Matériaux et options"
   materialsIntro="Le choix se fait selon la pente, le bâti existant et les règles d'urbanisme de votre commune. Tout est nommé précisément au devis, modèle et teinte compris."
   materials={materials}
-  pricingIntro="Les prix ci-dessous couvrent la fourniture, la pose et l'évacuation des gravats, hors échafaudage et hors reprise de charpente."
-  tarifs={tarifs}
+  visiteIntro="Une toiture ne se juge pas depuis le sol. La montée sur le toit permet de contrôler le support sous les tuiles, l'état des points singuliers et la charpente, avant d'annoncer quoi que ce soit."
   facteurs={facteurs}
   faq={faq}
 >
@@ -168,8 +149,8 @@ const faq: FaqItem[] = [
           Sur une réfection, la couverture est rarement le seul poste. Une fois
           les tuiles déposées, on voit l'état des chevrons et des pannes. Si le
           bois est attaqué ou affaissé, la reprise se traite dans la foulée,
-          pendant que la toiture est ouverte, ce qui évite de payer deux fois
-          l'installation du chantier. C'est l'objet de la prestation <a
+          pendant que la toiture est ouverte, ce qui évite de réinstaller deux
+          fois le chantier. C'est l'objet de la prestation <a
             href="/services/charpente">charpente et traitement du bois</a
           >.
         </p>
@@ -179,7 +160,7 @@ const faq: FaqItem[] = [
           l'eau finira par repasser au même endroit. Les gouttières, chéneaux,
           noues et solins relèvent de la <a href="/services/zinguerie"
             >zinguerie</a
-          >, et se chiffrent au mètre linéaire sur le même devis.
+          >, et se traitent au mètre linéaire sur le même devis.
         </p>
         <p>
           Enfin, une couverture neuve se garde propre. Sur les pans nord et sous

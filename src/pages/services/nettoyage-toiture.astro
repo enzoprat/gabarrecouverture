@@ -30,7 +30,7 @@ const includes = [
   },
   {
     label: "Remplacement des tuiles cassées",
-    text: "Les tuiles hors service repérées pendant le nettoyage sont changées dans la foulée, tant que le chantier est installé. C'est le moment où cela coûte le moins cher.",
+    text: "Les tuiles hors service repérées pendant le nettoyage sont changées dans la foulée, tant que le chantier est installé. Y revenir plus tard suppose de tout réinstaller.",
   },
   {
     label: "Protection des abords",
@@ -93,34 +93,12 @@ const materials = [
   },
 ];
 
-const tarifs = [
-  {
-    label: "Démoussage et rinçage seuls",
-    range: "12 à 22 €",
-    unit: "par m² de toiture",
-  },
-  {
-    label: "Démoussage et traitement anti-mousse",
-    range: "16 à 28 €",
-    unit: "par m² de toiture",
-  },
-  {
-    label: "Démoussage, traitement et hydrofuge",
-    range: "22 à 40 €",
-    unit: "par m² de toiture",
-  },
-  {
-    label: "Curage de gouttières seul",
-    range: "3 à 8 €",
-    unit: "par mètre linéaire",
-  },
-];
 
 const facteurs = [
   "L'épaisseur de la mousse, une toiture jamais nettoyée demande deux à trois fois plus de temps de grattage.",
   "La pente et la hauteur, qui déterminent le dispositif de sécurité, ligne de vie, échafaudage ou nacelle.",
   "Le type de tuile, une canal ancienne se travaille plus lentement qu'une mécanique plate.",
-  "L'option retenue, le seul hydrofuge représente une part importante du montant final.",
+  "L'option retenue, l'hydrofuge impose un passage supplémentaire et un temps de séchage entre les couches.",
   "L'environnement immédiat, plantations à protéger, piscine, terrasse ou accès difficile pour le matériel.",
 ];
 
@@ -159,8 +137,7 @@ const faq: FaqItem[] = [
   materialsTitle="Produits et options"
   materialsIntro="Trois niveaux de prestation existent, du simple démoussage au traitement complet avec hydrofuge. Le bon choix dépend de l'exposition de la toiture et de son état réel."
   materials={materials}
-  pricingIntro="Les montants ci-dessous s'entendent par mètre carré de toiture développée, protections et évacuation des résidus comprises."
-  tarifs={tarifs}
+  visiteIntro="L'épaisseur de la mousse et l'état de la terre cuite en dessous décident de ce qui est possible. Une tuile déjà feuilletée ne se nettoie pas, elle se remplace."
   facteurs={facteurs}
   faq={faq}
 >

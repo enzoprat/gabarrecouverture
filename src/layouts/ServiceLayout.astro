@@ -29,12 +29,6 @@ export interface Materiau {
   text: string;
 }
 
-export interface Tarif {
-  label: string;
-  range: string;
-  unit: string;
-}
-
 interface Props {
   slug: string;
   metaTitle: string;
@@ -54,8 +48,7 @@ interface Props {
   materialsTitle: string;
   materialsIntro: string;
   materials: Materiau[];
-  pricingIntro: string;
-  tarifs: Tarif[];
+  visiteIntro: string;
   facteurs: string[];
   faq: FaqItem[];
 }
@@ -79,8 +72,7 @@ const {
   materialsTitle,
   materialsIntro,
   materials,
-  pricingIntro,
-  tarifs,
+  visiteIntro,
   facteurs,
   faq,
 } = Astro.props;
@@ -232,35 +224,20 @@ const breadcrumb = [
       <div class="grid gap-10 lg:grid-cols-[1fr_1fr] lg:gap-14">
         <div>
           <SectionHeading
-            eyebrow="Budget"
-            title="Fourchette de prix indicative"
-            id="prix"
-            intro={pricingIntro}
+            eyebrow="Avant le devis"
+            title="Pourquoi une visite est nécessaire"
+            id="visite"
+            intro={visiteIntro}
           />
 
-          <dl class="mt-8 border-t border-line">
-            {
-              tarifs.map((tarif) => (
-                <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b border-line py-4">
-                  <dt class="text-[15px] font-medium text-ink-800">
-                    {tarif.label}
-                  </dt>
-                  <dd class="text-[15px] font-semibold text-ink-950">
-                    {tarif.range}
-                    <span class="font-normal text-ink-400"> {tarif.unit}</span>
-                  </dd>
-                </div>
-              ))
-            }
-          </dl>
-          <p class="mt-4 text-[14px] leading-[1.6] text-ink-400">
-            Ces montants sont des ordres de grandeur constatés, donnés à titre
-            indicatif. Seul un devis établi après visite engage un prix.
-          </p>
+          <div class="mt-8">
+            <CallButton size="lg" />
+            <p class="mt-3 text-[14px] text-ink-400">{CTA_REASSURANCE}</p>
+          </div>
         </div>
 
         <div class="lg:pt-4">
-          <h3 class="h3-site">Ce qui fait varier le prix</h3>
+          <h3 class="h3-site">Ce qui change d'un chantier à l'autre</h3>
           <ul class="mt-4 space-y-3">
             {
               facteurs.map((facteur) => (
@@ -271,10 +248,6 @@ const breadcrumb = [
               ))
             }
           </ul>
-          <div class="mt-8">
-            <CallButton size="lg" />
-            <p class="mt-3 text-[14px] text-ink-400">{CTA_REASSURANCE}</p>
-          </div>
         </div>
       </div>
     </div>

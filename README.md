@@ -60,6 +60,17 @@ Pour livrer les vraies photos, remplacer les fichiers de même nom dans
 `src/assets/` (voir `A-COMPLETER.md`). Aucun code n'est à modifier, les imports
 et les `alt` sont déjà en place.
 
+### Logo
+
+Le logo fourni est stocké détouré dans `src/assets/logo-gabarre-couverture.png`
+et utilisé dans l'en-tête, le menu mobile et le pied de page. `astro:assets` le
+sert en `.webp` en 1x et 2x, soit 4 ko et 14 ko.
+
+Le favicon (`public/favicon.png`) et l'icône iOS (`public/apple-touch-icon.png`)
+reprennent la seule illustration du logo, sans le mot-symbole, illisible sous
+48 px. Pour les régénérer après un changement de logo, recadrer l'illustration
+et exporter en 32 px et 180 px.
+
 ## Où modifier quoi
 
 | Besoin                                     | Fichier                            |
@@ -127,6 +138,10 @@ onze variantes d'un même texte.
 - **Aucun formulaire.** Pas de `<form>`, `<input>`, `<textarea>` ni `<select>`.
   Toute demande passe par le téléphone.
 - **Un seul libellé d'action** sur tout le site : « Appeler 06 66 63 73 35 ».
+- **Aucun prix affiché.** Pas de tarif, pas de fourchette, pas d'ordre de
+  grandeur, pas de `priceRange` dans le JSON-LD. Les pages prestation expliquent
+  pourquoi une visite est nécessaire et ce qui change d'un chantier à l'autre.
+  Le chiffrage se fait au téléphone puis au devis.
 - **Aucune donnée inventée.** Avis, logos partenaires, certifications, chiffres
   d'expérience : tout ce qui n'est pas confirmé reste un placeholder `{{...}}`
   visible, listé dans `A-COMPLETER.md`.

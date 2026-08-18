@@ -93,40 +93,13 @@ const materials = [
   },
 ];
 
-const tarifs = [
-  {
-    label: "Déplacement et recherche de fuite",
-    range: "150 à 350 €",
-    unit: "l'intervention",
-  },
-  {
-    label: "Reprise de solin de cheminée",
-    range: "250 à 700 €",
-    unit: "l'intervention",
-  },
-  {
-    label: "Remplacement de tuiles ponctuel",
-    range: "150 à 400 €",
-    unit: "l'intervention",
-  },
-  {
-    label: "Réfection de noue en zinc",
-    range: "90 à 180 €",
-    unit: "par mètre linéaire",
-  },
-  {
-    label: "Mise hors d'eau provisoire par bâchage",
-    range: "200 à 500 €",
-    unit: "l'intervention",
-  },
-];
 
 const facteurs = [
   "L'urgence réelle, une mise hors d'eau immédiate mobilise une demi-journée hors planning.",
   "La difficulté d'accès au point de fuite, notamment en partie haute ou derrière une souche.",
-  "La nature du désordre, une tuile à remplacer et une noue à refaire n'ont pas le même coût.",
+  "La nature du désordre, remplacer une tuile et refaire une noue ne demandent pas la même intervention.",
   "L'étendue des dégâts sur le support, un liteaunage pourri impose une dépose plus large.",
-  "La distance depuis Montauban, prise en compte dans le déplacement au-delà de la zone habituelle.",
+  "La distance depuis Montauban, qui pèse sur le délai de passage au-delà de la zone habituelle.",
 ];
 
 const faq: FaqItem[] = [
@@ -164,8 +137,7 @@ const faq: FaqItem[] = [
   materialsTitle="Solutions de réparation"
   materialsIntro="Une fuite se répare avec des pièces façonnées, pas avec du mastic. Voici les solutions retenues selon l'origine du désordre."
   materials={materials}
-  pricingIntro="Les montants ci-dessous couvrent le déplacement, la recherche et la reprise, hors échafaudage et hors reprise de charpente."
-  tarifs={tarifs}
+  visiteIntro="Le point d'entrée de l'eau est rarement à l'aplomb de la tache au plafond. Il faut monter, remonter le cheminement de l'eau et identifier le désordre réel avant d'engager une réparation."
   facteurs={facteurs}
   faq={faq}
 >
@@ -177,7 +149,7 @@ const faq: FaqItem[] = [
           Une fuite ponctuelle sur une toiture saine se répare et le dossier est
           clos. Mais si le même toit fuit à trois endroits différents en deux
           hivers, ce n'est plus un incident : la couverture arrive en fin de
-          vie. Dans ce cas, additionner les réparations coûte plus cher qu'une <a
+          vie. Dans ce cas, additionner les réparations n'a plus de sens face à une <a
             href="/services/couverture">réfection de toiture</a
           > menée d'un seul tenant.
         </p>

@@ -93,39 +93,12 @@ const materials = [
   },
 ];
 
-const tarifs = [
-  {
-    label: "Remplacement d'un chevron",
-    range: "80 à 200 €",
-    unit: "par unité",
-  },
-  {
-    label: "Reprise de panne ou de sablière",
-    range: "150 à 400 €",
-    unit: "par mètre linéaire",
-  },
-  {
-    label: "Traitement curatif de charpente",
-    range: "25 à 55 €",
-    unit: "par m² au sol",
-  },
-  {
-    label: "Traitement préventif",
-    range: "12 à 25 €",
-    unit: "par m² au sol",
-  },
-  {
-    label: "Renfort de ferme par moisage",
-    range: "400 à 1 200 €",
-    unit: "par ferme",
-  },
-];
 
 const facteurs = [
   "L'accessibilité des combles : un comble perdu bas de plafond ralentit fortement le travail.",
   "L'étendue de l'attaque, quelques chevrons ponctuels ou une charpente entière à traiter.",
   "La nécessité de déposer une partie de la couverture pour atteindre les bois.",
-  "La section et l'essence des bois à remplacer, le chêne coûte nettement plus cher que le sapin.",
+  "La section et l'essence des bois à remplacer, le chêne et le sapin ne se travaillent pas de la même façon.",
   "La présence d'un isolant à déposer et à reposer avant et après intervention.",
 ];
 
@@ -136,7 +109,7 @@ const faq: FaqItem[] = [
   },
   {
     q: "Faut-il traiter toute la charpente ou seulement les bois atteints ?",
-    a: "Le traitement se fait toujours sur l'ensemble des bois accessibles, pas uniquement sur les pièces attaquées. Les larves circulent d'une pièce à l'autre et une zone non traitée sert de réservoir pour une réinfestation. En revanche, l'injection, plus coûteuse, se concentre sur les bois de forte section où la pulvérisation ne pénètre pas suffisamment. Cette distinction figure clairement au devis, ligne par ligne.",
+    a: "Le traitement se fait toujours sur l'ensemble des bois accessibles, pas uniquement sur les pièces attaquées. Les larves circulent d'une pièce à l'autre et une zone non traitée sert de réservoir pour une réinfestation. En revanche, l'injection se concentre sur les bois de forte section, là où la pulvérisation ne pénètre pas suffisamment. Cette distinction figure clairement au devis, ligne par ligne.",
   },
   {
     q: "Peut-on réparer une charpente sans déposer la couverture ?",
@@ -164,8 +137,7 @@ const faq: FaqItem[] = [
   materialsTitle="Essences de bois et traitements"
   materialsIntro="Le bois de remplacement se choisit selon la pièce à reprendre et l'exposition à l'humidité. Le traitement se décide selon la nature de l'attaque constatée."
   materials={materials}
-  pricingIntro="Les montants ci-dessous couvrent la fourniture, la pose et l'évacuation des bois déposés, hors dépose de couverture."
-  tarifs={tarifs}
+  visiteIntro="Une charpente se diagnostique dans les combles, en sondant les bois au poinçon. C'est le seul moyen de distinguer une attaque ancienne et stabilisée d'une infestation active."
   facteurs={facteurs}
   faq={faq}
 >

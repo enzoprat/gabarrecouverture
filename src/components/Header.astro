@@ -1,6 +1,8 @@
 ---
+import { Image } from "astro:assets";
 import Icon from "./Icon.astro";
 import CallButton from "./CallButton.astro";
+import logo from "../assets/logo-gabarre-couverture.png";
 import { BUSINESS, CTA_ARIA, NAV, SERVICES } from "../site.config";
 
 const path = Astro.url.pathname.replace(/\/$/, "") || "/";
@@ -17,23 +19,18 @@ const isActive = (href: string) =>
   <div class="container-site">
     <div
       id="header-inner"
-      class="flex items-center justify-between gap-6 py-4 transition-[padding] duration-150 md:py-5"
+      class="flex items-center justify-between gap-6 py-3 transition-[padding] duration-150 md:py-3.5"
     >
-      <a href="/" class="flex shrink-0 items-center gap-2.5">
-        <span
-          class="flex h-9 w-9 items-center justify-center rounded-[8px] bg-ink-950 text-white"
-          aria-hidden="true"
-        >
-          <Icon name="roof" size={20} />
-        </span>
-        <span class="leading-tight">
-          <span class="block text-[17px] font-extrabold tracking-[-0.02em] text-ink-950"
-            >Gabarre</span
-          >
-          <span class="block text-[11px] font-medium uppercase tracking-[0.08em] text-ink-400"
-            >Couverture</span
-          >
-        </span>
+      <a href="/" class="flex shrink-0 items-center">
+        <Image
+          id="header-logo"
+          src={logo}
+          alt="Gabarre Couverture"
+          width={88}
+          densities={[1, 2]}
+          loading="eager"
+          class="h-13 w-auto transition-[height] duration-150 md:h-16"
+        />
         <span class="sr-only">, retour à l'accueil</span>
       </a>
 
@@ -93,9 +90,14 @@ const isActive = (href: string) =>
   <div class="flex h-full flex-col">
     <div class="container-site">
       <div class="flex items-center justify-between py-4">
-        <span class="text-[17px] font-extrabold tracking-[-0.02em] text-ink-950"
-          >Gabarre Couverture</span
-        >
+        <Image
+          src={logo}
+          alt="Gabarre Couverture"
+          width={88}
+          densities={[1, 2]}
+          loading="eager"
+          class="h-13 w-auto"
+        />
         <button
           type="button"
           id="menu-close"
@@ -166,6 +168,7 @@ const isActive = (href: string) =>
   const closeBtn = document.getElementById("menu-close");
   const menu = document.getElementById("mobile-menu");
   const inner = document.getElementById("header-inner");
+  const logo = document.getElementById("header-logo");
 
   function setMenu(open: boolean) {
     if (!menu || !openBtn) return;
@@ -191,10 +194,13 @@ const isActive = (href: string) =>
     const next = window.scrollY > 24;
     if (next === compact || !inner) return;
     compact = next;
-    inner.classList.toggle("py-4", !compact);
-    inner.classList.toggle("md:py-5", !compact);
-    inner.classList.toggle("py-2.5", compact);
-    inner.classList.toggle("md:py-3", compact);
+    inner.classList.toggle("py-3", !compact);
+    inner.classList.toggle("md:py-3.5", !compact);
+    inner.classList.toggle("py-2", compact);
+    logo?.classList.toggle("h-13", !compact);
+    logo?.classList.toggle("md:h-16", !compact);
+    logo?.classList.toggle("h-10", compact);
+    logo?.classList.toggle("md:h-12", compact);
   }
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
