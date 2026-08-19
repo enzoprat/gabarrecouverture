@@ -57,8 +57,15 @@ documents de l'entreprise :
 
 ## 2. Photos à fournir
 
-Les quatorze visuels actuels sont des aplats générés, marqués « PHOTO A
-FOURNIR ». Ils tiennent la maquette mais ne doivent pas partir en production.
+Quatre photos réelles ont été livrées et intégrées : le hero, la couverture, la
+zinguerie et la réparation de fuite. Les dix visuels restants sont encore des
+aplats générés, marqués « PHOTO A FOURNIR ». Ils tiennent la maquette mais ne
+doivent pas partir en production.
+
+Réserve sur les quatre photos livrées : rien ne prouve qu'il s'agit de chantiers
+de l'entreprise. Si ce sont des images trouvées en ligne, elles doivent être
+remplacées avant la mise en ligne, pour le droit d'auteur comme pour la
+crédibilité. À confirmer avec l'artisan.
 
 **Comment les remplacer :** déposer les fichiers dans `src/assets/` en gardant
 exactement le même nom et l'extension `.webp`. Aucun code n'est à modifier, les
@@ -66,12 +73,12 @@ imports, les tailles et les textes alternatifs sont déjà en place.
 
 | Fichier                            | Sujet attendu                                               | Cadrage      |
 | ---------------------------------- | ----------------------------------------------------------- | ------------ |
-| `hero-toiture-montauban.webp`      | Toiture en cours de réfection, de préférence tuile canal     | 4/3 paysage  |
-| `service-couverture.webp`          | Pose de tuiles avec écran sous-toiture apparent              | 4/3 paysage  |
-| `service-zinguerie.webp`           | Gouttière ou chéneau zinc en cours de pose ou soudé          | 4/3 paysage  |
+| `hero-toiture-montauban.webp`      | **Livrée.** Remaniage de tuile canal                         | 4/3 paysage  |
+| `service-couverture.webp`          | **Livrée.** Pose de tuiles sur liteaunage et écran           | 3/2 paysage  |
+| `service-zinguerie.webp`           | **Livrée.** Rives zinc, faîtage et souche                    | 3/2 paysage  |
 | `service-charpente.webp`           | Charpente vue depuis les combles                             | 4/3 paysage  |
 | `service-nettoyage-toiture.webp`   | Pan de toit à moitié démoussé, mousse encore visible         | 4/3 paysage  |
-| `service-reparation-fuite.webp`    | Solin de cheminée décollé ou noue dégradée                   | 4/3 paysage  |
+| `service-reparation-fuite.webp`    | **Livrée.** Souche et fenêtre de toit                        | 3/2 paysage  |
 | `entreprise-atelier.webp`          | Véhicule, matériel ou artisan au travail                     | 4/3 paysage  |
 | `zone-intervention.webp`           | Vue large de toitures du secteur, ou véhicule sur la route   | 4/3 paysage  |
 | `chantier-1-avant.webp`            | Chantier 1, état de départ                                   | 4/3 paysage  |
