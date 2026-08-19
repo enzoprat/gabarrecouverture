@@ -43,21 +43,16 @@ function tilePattern(w, h, base, accent, label) {
   );
 }
 
+/**
+ * Seuls les visuels encore manquants figurent ici. Les emplacements servis par
+ * une vraie photo en ont été retirés, sans quoi relancer le script écraserait
+ * les fichiers livrés.
+ */
 const jobs = [
-  ["src/assets/hero-toiture-montauban.webp", 1760, 1320, INK, TUILE, "PHOTO A FOURNIR"],
-  ["src/assets/service-couverture.webp", 1400, 933, INK, TUILE, "PHOTO A FOURNIR"],
-  ["src/assets/service-zinguerie.webp", 1400, 933, INK, TUILE, "PHOTO A FOURNIR"],
   ["src/assets/service-charpente.webp", 1400, 933, INK, TUILE, "PHOTO A FOURNIR"],
   ["src/assets/service-nettoyage-toiture.webp", 1400, 933, INK, TUILE, "PHOTO A FOURNIR"],
-  ["src/assets/service-reparation-fuite.webp", 1400, 933, INK, TUILE, "PHOTO A FOURNIR"],
   ["src/assets/entreprise-atelier.webp", 1400, 1050, INK, TUILE, "PHOTO A FOURNIR"],
   ["src/assets/zone-intervention.webp", 1200, 900, INK_LIGHT, TUILE, "CARTE A FOURNIR"],
-  ["src/assets/chantier-1-avant.webp", 1200, 900, INK, TUILE, "AVANT / PHOTO A FOURNIR"],
-  ["src/assets/chantier-1-apres.webp", 1200, 900, INK, TUILE, "APRES / PHOTO A FOURNIR"],
-  ["src/assets/chantier-2-avant.webp", 1200, 900, INK, TUILE, "AVANT / PHOTO A FOURNIR"],
-  ["src/assets/chantier-2-apres.webp", 1200, 900, INK, TUILE, "APRES / PHOTO A FOURNIR"],
-  ["src/assets/chantier-3-avant.webp", 1200, 900, INK, TUILE, "AVANT / PHOTO A FOURNIR"],
-  ["src/assets/chantier-3-apres.webp", 1200, 900, INK, TUILE, "APRES / PHOTO A FOURNIR"],
 ];
 
 for (const [file, w, h, base, accent, label] of jobs) {

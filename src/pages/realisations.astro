@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHero from "../components/PageHero.astro";
 import SectionHeading from "../components/SectionHeading.astro";
-import BeforeAfter from "../components/BeforeAfter.astro";
+import ChantierCard from "../components/ChantierCard.astro";
 import CallCta from "../components/CallCta.astro";
 import Icon from "../components/Icon.astro";
 import { REALISATIONS } from "../data/realisations";
@@ -12,7 +12,7 @@ const breadcrumb = [{ label: "Réalisations" }];
 
 const title = "Réalisations, chantiers de toiture à Montauban | Gabarre";
 const description =
-  "Chantiers de couverture, zinguerie et démoussage réalisés à Montauban et en Tarn-et-Garonne, en photos avant et après, avec commune et matériau posé.";
+  "Chantiers de couverture, charpente et zinguerie réalisés à Montauban et en Tarn-et-Garonne, en photos, avec la commune et le matériau posé.";
 ---
 
 <BaseLayout
@@ -24,7 +24,7 @@ const description =
   <PageHero
     eyebrow="Réalisations"
     title="Chantiers réalisés à Montauban et alentours"
-    lead="Chaque chantier est présenté avec son état de départ, la prestation réalisée, la commune et le matériau posé. Pas de photo de catalogue, uniquement des toitures sur lesquelles je suis intervenu."
+    lead="Chaque chantier est présenté avec la prestation réalisée, la commune et le matériau posé. Pas de photo de catalogue, uniquement des toitures sur lesquelles je suis intervenu."
     breadcrumb={breadcrumb}
   />
 
@@ -46,22 +46,22 @@ const description =
       </div>
 
       <SectionHeading
-        eyebrow="Avant et après"
+        eyebrow="En images"
         title="Trois chantiers en détail"
         id="chantiers"
       />
 
-      <div class="mt-10 grid gap-6 lg:grid-cols-2">
+      <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {
           REALISATIONS.map((item, index) => (
-            <BeforeAfter item={item} eager={index === 0}>
-              <p class="mt-3 text-[15px] leading-[1.65] text-ink-600">
+            <ChantierCard item={item} eager={index === 0}>
+              <p class="mt-3 flex-1 text-[15px] leading-[1.65] text-ink-600">
                 {item.description}
               </p>
               <p class="mt-3 text-[14px] text-ink-400">
                 Durée du chantier : {item.duree}
               </p>
-            </BeforeAfter>
+            </ChantierCard>
           ))
         }
       </div>

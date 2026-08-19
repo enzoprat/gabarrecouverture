@@ -57,12 +57,12 @@ documents de l'entreprise :
 
 ## 2. Photos à fournir
 
-Quatre photos réelles ont été livrées et intégrées : le hero, la couverture, la
-zinguerie et la réparation de fuite. Les dix visuels restants sont encore des
-aplats générés, marqués « PHOTO A FOURNIR ». Ils tiennent la maquette mais ne
-doivent pas partir en production.
+Sept photos réelles ont été livrées et intégrées : le hero, la couverture, la
+zinguerie, la réparation de fuite et les trois chantiers. Les quatre visuels
+restants sont encore des aplats générés, marqués « PHOTO A FOURNIR ». Ils
+tiennent la maquette mais ne doivent pas partir en production.
 
-Réserve sur les quatre photos livrées : rien ne prouve qu'il s'agit de chantiers
+Réserve sur les photos livrées : rien ne prouve qu'il s'agit de chantiers
 de l'entreprise. Si ce sont des images trouvées en ligne, elles doivent être
 remplacées avant la mise en ligne, pour le droit d'auteur comme pour la
 crédibilité. À confirmer avec l'artisan.
@@ -81,28 +81,21 @@ imports, les tailles et les textes alternatifs sont déjà en place.
 | `service-reparation-fuite.webp`    | **Livrée.** Souche et fenêtre de toit                        | 3/2 paysage  |
 | `entreprise-atelier.webp`          | Véhicule, matériel ou artisan au travail                     | 4/3 paysage  |
 | `zone-intervention.webp`           | Vue large de toitures du secteur, ou véhicule sur la route   | 4/3 paysage  |
-| `chantier-1-avant.webp`            | Chantier 1, état de départ                                   | 4/3 paysage  |
-| `chantier-1-apres.webp`            | Chantier 1, après travaux, **même angle que la photo avant** | 4/3 paysage  |
-| `chantier-2-avant.webp`            | Chantier 2, état de départ                                   | 4/3 paysage  |
-| `chantier-2-apres.webp`            | Chantier 2, après travaux, même angle                        | 4/3 paysage  |
-| `chantier-3-avant.webp`            | Chantier 3, état de départ                                   | 4/3 paysage  |
-| `chantier-3-apres.webp`            | Chantier 3, après travaux, même angle                        | 4/3 paysage  |
+| `chantier-1.webp`                  | **Livrée.** Faîtage ouvert sur tuile canal                   | 3/2 paysage  |
+| `chantier-2.webp`                  | **Livrée.** Chevrons neufs sur charpente reprise             | 3/2 paysage  |
+| `chantier-3.webp`                  | **Livrée.** Tuiles en piles sur liteaunage neuf              | 3/2 paysage  |
 
 Recommandations de prise de vue :
 
 - Photos réelles de chantiers de l'entreprise. Aucune banque d'images : une
   photo de catalogue se repère et décrédibilise le reste de la page.
-- Pour les paires avant et après, se placer au même endroit avec le même
-  cadrage. C'est ce qui rend la comparaison lisible.
 - Format `.webp`, largeur d'origine d'au moins 1600 px. Astro génère
   automatiquement les déclinaisons responsives.
 - Éviter les visages de tiers et les plaques d'immatriculation de clients.
 
-**À corriger aussi** : les textes alternatifs des six images de chantier
-contiennent la mention « photo à remplacer par le visuel réel »
-(`src/data/realisations.ts`). Une fois les vraies photos livrées, décrire ce que
-l'on voit, par exemple « Toiture en tuile canal avant réfection, tuiles
-déplacées sur le versant nord ».
+**À corriger aussi** : les textes alternatifs des trois chantiers décrivent la
+photo actuellement en place (`src/data/realisations.ts`). Si une photo est
+remplacée, réécrire l'`alt` correspondant pour décrire ce que l'on voit.
 
 ---
 
