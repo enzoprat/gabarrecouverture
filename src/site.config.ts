@@ -26,16 +26,11 @@ export const BUSINESS = {
 
   /** TODO {{email}} : affiché uniquement en mentions légales, jamais en CTA. */
   email: "{{email}}",
-  /** TODO {{adresse}} */
-  street: "{{adresse}}",
-  /** TODO {{code postal}} */
-  postalCode: "{{code postal}}",
   /** TODO {{siret}} */
   siret: "{{siret}}",
   /** TODO {{année}} */
   foundingYear: "{{année}}",
-  /** TODO {{ex. lun-sam 8h-19h}} */
-  openingHoursLabel: "{{horaires}}",
+  openingHoursLabel: "8h - 19h, du lundi au samedi",
   /** TODO {{assureur + n° de contrat}} */
   insurance: "{{assureur + n° de contrat}}",
 } as const;
@@ -51,8 +46,8 @@ export const CTA_REASSURANCE = `Devis gratuit, réponse directe, déplacement su
 
 /**
  * Coordonnées géographiques.
- * TODO : remplacer par les coordonnées exactes du siège une fois l'adresse connue.
- * Valeur actuelle : centre-ville de Montauban.
+ * Valeur actuelle : centre-ville de Montauban. Aucune adresse n'est publiée,
+ * le point sert uniquement au JSON-LD de zone d'intervention.
  */
 export const GEO = {
   latitude: 44.0175,

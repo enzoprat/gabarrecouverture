@@ -4,7 +4,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import CallButton from "../components/CallButton.astro";
 import CallCta from "../components/CallCta.astro";
 import Card from "../components/Card.astro";
-import DecennaleBanner from "../components/DecennaleBanner.astro";
 import Faq from "../components/Faq.astro";
 import type { FaqItem } from "../components/Faq.astro";
 import Icon from "../components/Icon.astro";
@@ -231,10 +230,7 @@ const description =
     </div>
   </section>
 
-  {/* 2. Bandeau garantie décennale */}
-  <DecennaleBanner />
-
-  {/* 3. Les 4 métiers */}
+  {/* 2. Les 4 métiers */}
   <section aria-labelledby="metiers-title" class="bg-white py-16 md:py-24">
     <div class="container-site">
       <SectionHeading
@@ -279,7 +275,7 @@ const description =
     </div>
   </section>
 
-  {/* 4. Pourquoi Gabarre */}
+  {/* 3. Pourquoi Gabarre */}
   <section aria-labelledby="pourquoi-title" class="bg-cream py-16 md:py-24">
     <div class="container-site">
       <SectionHeading
@@ -311,7 +307,7 @@ const description =
     </div>
   </section>
 
-  {/* 5. Signes d'alerte */}
+  {/* 4. Signes d'alerte */}
   <section aria-labelledby="alertes-title" class="bg-white py-16 md:py-24">
     <div class="container-site">
       <SectionHeading
@@ -351,7 +347,7 @@ const description =
     </div>
   </section>
 
-  {/* 6. Déroulé d'un chantier */}
+  {/* 5. Déroulé d'un chantier */}
   <section aria-labelledby="deroule-title" class="bg-cream py-16 md:py-24">
     <div class="container-site">
       <SectionHeading
@@ -383,7 +379,7 @@ const description =
     </div>
   </section>
 
-  {/* 7. Réalisations */}
+  {/* 6. Réalisations */}
   <section aria-labelledby="realisations-title" class="bg-white py-16 md:py-24">
     <div class="container-site">
       <SectionHeading
@@ -407,7 +403,7 @@ const description =
     </div>
   </section>
 
-  {/* 8. Zone d'intervention */}
+  {/* 7. Zone d'intervention */}
   <section aria-labelledby="zone-title" class="bg-cream py-16 md:py-24">
     <div class="container-site">
       <div class="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:gap-14">
@@ -458,7 +454,7 @@ const description =
     </div>
   </section>
 
-  {/* 9. FAQ */}
+  {/* 8. FAQ */}
   <section aria-labelledby="faq-title" class="bg-white py-16 md:py-24">
     <div class="container-site">
       <SectionHeading
@@ -473,6 +469,6 @@ const description =
     </div>
   </section>
 
-  {/* 10. CTA final */}
+  {/* 9. CTA final */}
   <CallCta />
 </BaseLayout>

@@ -5,9 +5,8 @@ export const isFilled = (value: string) => !value.includes("{{");
 
 /**
  * Horaires structurés pour le JSON-LD.
- * TODO : confirmer avec le client, puis renseigner BUSINESS.openingHoursLabel
- * pour que le bloc soit émis (il est volontairement omis tant que la donnée
- * n'est pas validée).
+ * Doivent rester cohérents avec BUSINESS.openingHoursLabel, qui porte la même
+ * information en toutes lettres.
  */
 export const OPENING_HOURS = [
   {
@@ -27,10 +26,6 @@ export const OPENING_HOURS = [
 
 const address = {
   "@type": "PostalAddress",
-  ...(isFilled(BUSINESS.street) ? { streetAddress: BUSINESS.street } : {}),
-  ...(isFilled(BUSINESS.postalCode)
-    ? { postalCode: BUSINESS.postalCode }
-    : {}),
   addressLocality: BUSINESS.city,
   addressRegion: BUSINESS.region,
   addressCountry: BUSINESS.country,

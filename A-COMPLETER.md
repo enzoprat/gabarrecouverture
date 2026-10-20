@@ -16,12 +16,9 @@ pour cette partie.
 | Placeholder                 | Champ                 | Où cela apparaît                                            |
 | --------------------------- | --------------------- | ----------------------------------------------------------- |
 | `{{domaine}}`               | `SITE_URL`            | Canonical, Open Graph, sitemap, robots.txt                   |
-| `{{adresse}}`               | `BUSINESS.street`     | Pied de page, page entreprise, mentions légales, JSON-LD     |
-| `{{code postal}}`           | `BUSINESS.postalCode` | Idem                                                          |
 | `{{siret}}`                 | `BUSINESS.siret`      | Bas de page, page entreprise, mentions légales               |
 | `{{année}}`                 | `BUSINESS.foundingYear` | Page entreprise, premier paragraphe                        |
-| `{{horaires}}`              | `BUSINESS.openingHoursLabel` | Pied de page, page entreprise, bloc CTA final          |
-| `{{assureur + n° contrat}}` | `BUSINESS.insurance`  | Bandeau décennale, page entreprise, mentions légales, JSON-LD |
+| `{{assureur + n° contrat}}` | `BUSINESS.insurance`  | Pied de page, page entreprise, mentions légales               |
 | `{{email}}`                 | `BUSINESS.email`      | Mentions légales et politique de confidentialité uniquement   |
 
 Points d'attention :
@@ -29,16 +26,31 @@ Points d'attention :
 - **`SITE_URL`** contient actuellement `https://gabarre-couverture.fr` et non un
   placeholder, sinon le build du sitemap échoue. À remplacer par le domaine réel
   avant le premier déploiement en production.
-- **`GEO`** (latitude et longitude) pointe pour l'instant sur le centre-ville de
-  Montauban. À remplacer par les coordonnées exactes du siège une fois l'adresse
-  connue, sinon la fiche `RoofingContractor` du JSON-LD est légèrement fausse.
-- **`{{horaires}}`** : le format attendu est un libellé lisible, par exemple
-  « Lundi au samedi, 8h à 19h ». Les horaires machine du JSON-LD sont définis
-  dans `src/lib/schema.ts` (`OPENING_HOURS`) et n'apparaissent dans le balisage
-  qu'une fois ce libellé rempli. Vérifier que les deux disent la même chose.
+- **`GEO`** (latitude et longitude) pointe sur le centre-ville de Montauban.
+  Aucune adresse n'étant publiée, ce point sert uniquement à situer la zone
+  d'intervention dans le JSON-LD.
+- **Horaires** : renseignés, « 8h - 19h, du lundi au samedi ». Le libellé est
+  dans `BUSINESS.openingHoursLabel`, les horaires machine du JSON-LD dans
+  `src/lib/schema.ts` (`OPENING_HOURS`). Si l'un change, changer l'autre.
 - **`sameAs`** dans `src/lib/schema.ts` est un tableau vide. Y placer l'URL de
   la fiche Google Business Profile et, le cas échéant, la page Facebook. C'est
   l'un des signaux les plus utiles pour le référencement local.
+
+### Adresse postale retirée du site
+
+Sur demande du client, la rue et le code postal n'apparaissent plus nulle part :
+ni pied de page, ni page entreprise, ni mentions légales, ni JSON-LD. Les
+mentions légales n'indiquent plus que « Montauban, Tarn-et-Garonne », et la
+demande d'exercice des droits RGPD se fait désormais par téléphone ou par
+courriel au lieu du courrier postal.
+
+**Point de vigilance juridique** : l'article 19 de la LCEN impose de publier
+l'adresse du siège dans les mentions légales d'un site professionnel, et le
+RGPD suppose un moyen de contact pour l'exercice des droits. En l'état, le site
+n'est donc pas complètement conforme. À arbitrer avec le client : soit l'adresse
+est rétablie dans les seules mentions légales, soit une domiciliation est
+indiquée. Les champs `BUSINESS.street` et `BUSINESS.postalCode` ont été
+supprimés de `src/site.config.ts`, il faut les recréer pour revenir en arrière.
 
 ### Informations manquantes dans les mentions légales
 
@@ -117,18 +129,17 @@ le numéro pour l'ajouter. Sans numéro vérifiable, la mention ne sera pas ajou
 
 ### 3.3 Les trois chantiers de la page réalisations
 
-`src/data/realisations.ts`. Pour chacun des trois chantiers :
+`src/data/realisations.ts`. Renseignés par le client : remaniage de toiture,
+reprise de charpente et pose de toiture neuve, tous trois à Montauban. Le
+matériau indiqué décrit ce que montre la photo, rien de plus.
 
-- type de prestation, par exemple « réfection complète de toiture » ;
-- commune, qui doit faire partie de la zone d'intervention ;
-- matériau posé, par exemple « tuile canal terre cuite » ;
-- durée réelle du chantier ;
-- deux lignes de description : état de départ, travaux réalisés, résultat.
+Ni durée ni descriptif ne sont publiés, sur demande du client : ces informations
+varient trop d'un chantier à l'autre pour être affichées sans le dossier réel.
+L'encadré « contenu en attente de validation » a donc été retiré de la page.
 
-Tant que ces champs ne sont pas remplis, la page `/realisations` affiche un
-encadré qui indique explicitement que le contenu attend validation. **Cet
-encadré doit être retiré une fois les chantiers renseignés** (section en haut de
-`src/pages/realisations.astro`).
+À vérifier avec le client avant la mise en ligne : que ces trois chantiers sont
+bien les siens et qu'ils ont bien eu lieu à Montauban. C'est la seule donnée de
+la page qui ne se lit pas sur la photo.
 
 ### 3.4 Aucun prix affiché
 
